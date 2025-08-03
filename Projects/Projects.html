@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>Projects</title>
-  <link rel="stylesheet" href="H&dM.css" />
+  <link rel="stylesheet" href="../H&dM.css" />
 </head>
 <body>
   <!-- Header will be injected here -->
   <div id="site-header"></div>
   <script>
-    fetch('header.html')
+    fetch('../header.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('site-header').innerHTML = data;
@@ -23,7 +23,7 @@
   <script>
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
-    fetch('all-projects.json')
+    fetch('../all-projects.json')
       .then(response => response.json())
       .then(projectsData => {
         const container = document.getElementById('projects-container');
@@ -32,9 +32,9 @@
           if (images.length === 0) return;
 
           // Use the first image as thumbnail
-          const thumbnail = `Projects/${projectKey}/images/${images[0].filename}`;
+          const thumbnail = `${projectKey}/Images/${images[0].filename}`;
           const card = document.createElement('a');
-          card.href = `${projectKey}.html`;
+          card.href = `${projectKey}/${projectKey}.html`;
           card.className = 'project-card';
           card.style.position = 'relative';
 
