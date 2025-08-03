@@ -8,14 +8,6 @@
 <body>
   <!-- Header will be injected here -->
   <div id="site-header"></div>
-  <script>
-    fetch('../header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      });
-  </script>
-
   <main>
     <div class="projects-grid" id="projects-container"></div>
   </main>
@@ -23,52 +15,88 @@
   <script>
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
+    fetch('../header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+        if (isAdmin) {
+          const icon = document.getElementById('edit-icon');
+          if (icon) {
+            icon.style.display = 'block';
+            icon.addEventListener('click', () => {
+              document.body.classList.toggle('editing');
+              renderProjects();
+            });
+          }
+        }
+      });
+
+    let projectEntries = [];
+    const container = document.getElementById('projects-container');
+    let draggedIndex = null;
+
+    function renderProjects() {
+      container.innerHTML = '';
+      projectEntries.forEach(([projectKey, images]) => {
+        if (images.length === 0) return;
+        const thumbnail = `${projectKey}/Images/${images[0].filename}`;
+        const card = document.createElement('a');
+        card.href = `${projectKey}/${projectKey}.html`;
+        card.className = 'project-card';
+        card.innerHTML = `
+          <img src="${thumbnail}" alt="${images[0].title}">
+          <div class="project-title">${projectKey.replace(/_/g, ' ')}</div>
+        `;
+        if (document.body.classList.contains('editing')) {
+          card.setAttribute('draggable', true);
+        }
+        container.appendChild(card);
+      });
+    }
+
     fetch('../all-projects.json')
       .then(response => response.json())
-      .then(projectsData => {
-        const container = document.getElementById('projects-container');
-
-        Object.entries(projectsData).forEach(([projectKey, images]) => {
-          if (images.length === 0) return;
-
-          // Use the first image as thumbnail
-          const thumbnail = `${projectKey}/Images/${images[0].filename}`;
-          const card = document.createElement('a');
-          card.href = `${projectKey}/${projectKey}.html`;
-          card.className = 'project-card';
-          card.style.position = 'relative';
-
-          card.innerHTML = `
-            <img src="${thumbnail}" alt="${images[0].title}">
-            <div class="project-title" contenteditable="${isAdmin}">${projectKey.replace(/_/g, ' ')}</div>
-            ${isAdmin ? `<button class="edit-button" data-project="${projectKey}">✏️</button>` : ''}
-          `;
-
-          container.appendChild(card);
-        });
-
-        if (isAdmin) {
-          const style = document.createElement('style');
-          style.textContent = `
-            .edit-button {
-              position: absolute;
-              top: 10px;
-              right: 10px;
-              background: rgba(255,255,255,0.9);
-              border: none;
-              cursor: pointer;
-              font-size: 1rem;
-              padding: 4px 8px;
-              border-radius: 6px;
-              z-index: 2;
-            }
-          `;
-          document.head.appendChild(style);
-        }
+      .then(data => {
+        projectEntries = Object.entries(data);
+        renderProjects();
       })
       .catch(error => {
-        console.error("Error loading all-projects.json:", error);
+        console.error('Error loading all-projects.json:', error);
       });
+
+    document.addEventListener('dragstart', e => {
+      if (!e.target.classList.contains('project-card')) return;
+      draggedIndex = [...container.children].indexOf(e.target);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+
+    document.addEventListener('dragover', e => {
+      if (document.body.classList.contains('editing') && e.target.classList.contains('project-card')) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('drop', e => {
+      if (!document.body.classList.contains('editing') || !e.target.classList.contains('project-card')) return;
+      e.preventDefault();
+      const dropIndex = [...container.children].indexOf(e.target);
+      const [moved] = projectEntries.splice(draggedIndex, 1);
+      projectEntries.splice(dropIndex, 0, moved);
+      renderProjects();
+      saveOrder();
+    });
+
+    function saveOrder() {
+      const ordered = {};
+      projectEntries.forEach(([key, images]) => {
+        ordered[key] = images;
+      });
+      fetch('../save-projects.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ordered)
+      }).catch(err => console.error('Save failed', err));
+    }
   </script>
 </body>
 </html>
