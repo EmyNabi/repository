@@ -44,15 +44,14 @@
       const user = document.getElementById('username').value;
       const pass = document.getElementById('password').value;
 
-      if (user === 'admin' && pass === 'admin') {
-        console.log(localStorage.getItem('isAdmin'));
-		console.log("Trying to log in", user, pass);
-		console.log("Redirecting to Projects.html...");
-        window.location.href = 'Projects.html'; // or dashboard.html
-      } else {
-        document.getElementById('error-message').textContent = 'Invalid credentials';
+        if (user === 'admin' && pass === 'admin') {
+          // Persist admin status so restricted features can be enabled
+          localStorage.setItem('isAdmin', 'true');
+          window.location.href = 'Projects.html'; // or dashboard.html
+        } else {
+          document.getElementById('error-message').textContent = 'Invalid credentials';
+        }
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
