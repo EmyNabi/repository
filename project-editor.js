@@ -27,6 +27,7 @@ function render() {
       <div class="project-text">
         <h3 contenteditable="${isAdmin}">${img.title}</h3>
         <p contenteditable="${isAdmin}">${img.description}</p>
+        ${isAdmin ? `<button class="cover-btn" ${img.cover ? 'disabled' : ''}>${img.cover ? 'Cover Image' : 'Set as Cover'}</button>` : ''}
         ${isAdmin ? `<select class="layout-select">
             <option value="">Default</option>
             <option value="left">Left</option>
@@ -38,6 +39,16 @@ function render() {
       </div>
     `;
     if (isAdmin) {
+      const coverBtn = section.querySelector('.cover-btn');
+      if (coverBtn) {
+        coverBtn.addEventListener('click', () => {
+          if (images[index].cover) return;
+          images.forEach(i => i.cover = false);
+          images[index].cover = true;
+          render();
+          save();
+        });
+      }
       const sel = section.querySelector('.layout-select');
       sel.value = img.layout || '';
       sel.addEventListener('change', e => {

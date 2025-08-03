@@ -65,13 +65,15 @@
         card.href = `${projectKey}/${projectKey}.html`;
         card.className = 'project-card';
 
-        let content = '';
-        if (images.length > 0) {
-          const thumbnail = `${projectKey}/Images/${images[0].filename}`;
-          content += `<img src="${thumbnail}" alt="${images[0].title}">`;
-        } else {
-          content += `<div class="no-image">No Image</div>`;
-        }
+      let content = '';
+      if (images.length > 0) {
+        const coverImage = images.find(img => img.cover) || images[0];
+        const thumbnail = `${projectKey}/Images/${coverImage.filename}`;
+        const altText = coverImage.title || projectKey.replace(/_/g, ' ');
+        content += `<img src="${thumbnail}" alt="${altText}">`;
+      } else {
+        content += `<div class="no-image">No Image</div>`;
+      }
         content += `<div class="project-title">${projectKey.replace(/_/g, ' ')}</div>`;
         card.innerHTML = content;
 
