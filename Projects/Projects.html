@@ -34,6 +34,29 @@
     let projectEntries = [];
     const container = document.getElementById('projects-container');
     let draggedIndex = null;
+    if (isAdmin) {
+      const addBtn = document.createElement('button');
+      addBtn.id = 'add-project-btn';
+      addBtn.textContent = '+';
+      addBtn.title = 'Add Project';
+      addBtn.addEventListener('click', () => {
+        const key = prompt('Enter new project identifier (use underscores instead of spaces)');
+        if (!key) return;
+        if (projectEntries.some(([k]) => k === key)) {
+          alert('Project already exists');
+          return;
+        }
+        projectEntries.push([key, []]);
+        renderProjects();
+        saveOrder();
+        fetch('../create-project.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key })
+        }).catch(err => console.error('create-project failed', err));
+      });
+      document.body.appendChild(addBtn);
+    }
 
     function renderProjects() {
       container.innerHTML = '';

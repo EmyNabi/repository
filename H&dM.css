@@ -62,6 +62,23 @@ nav a:hover {
   font-size: 1.2rem;
 }
 
+#add-project-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background: white;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+}
+body.editing #add-project-btn {
+  display: block;
+}
+
 body.editing .project-card {
   border: 2px dashed black;
   cursor: move;
@@ -193,6 +210,25 @@ body.editing .project-card {
   margin-bottom: 60px;
   gap: 40px;
   flex-wrap: wrap;
+}
+.project-section.left {
+  flex-direction: row;
+}
+.project-section.right {
+  flex-direction: row-reverse;
+}
+.project-section.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.project-section.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.project-section.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
 }
 .project-section img {
   max-width: 50%;
