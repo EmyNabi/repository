@@ -15,78 +15,15 @@
       });
   </script>
 
-  <main class="project-detail">
+  <main class="project-detail" data-project="comprehensive_studio">
     <h2>Comprehensive Studio</h2>
     <p>This project explores architectural infrastructure and public spatial systems through digital and physical modeling, generative diagrams, and construction logic.</p>
-
     <div id="dynamic-project-sections"></div>
+    <div id="admin-tools" style="display:none;">
+      <input type="file" id="image-upload" multiple />
+    </div>
   </main>
 
-  <script>
-    const projectKey = 'comprehensive_studio';
-    const baseImagePath = 'Images/';
-
-    fetch('../../all-projects.json')
-      .then(res => res.json())
-      .then(data => {
-        const images = data[projectKey];
-        const container = document.getElementById('dynamic-project-sections');
-
-        images.forEach(item => {
-          const section = document.createElement('div');
-          section.className = 'project-section';
-
-          section.innerHTML = `
-            <img class="lightbox-image" src="${baseImagePath + item.filename}" alt="${item.title}" />
-            <div class="project-text">
-              <h3>${item.title}</h3>
-              <p>${item.description}</p>
-            </div>
-          `;
-
-          container.appendChild(section);
-        });
-      });
-  </script>
-
-  <!-- Lightbox Script -->
-  <script>
-    document.addEventListener('click', e => {
-      if (e.target.classList.contains('lightbox-image')) {
-        showLightbox(Array.from(document.querySelectorAll('.lightbox-image')), e.target);
-      }
-    });
-
-    function showLightbox(images, activeImage) {
-      let currentIndex = images.indexOf(activeImage);
-
-      const overlay = document.createElement('div');
-      overlay.className = 'lightbox-overlay';
-      overlay.innerHTML = `
-        <span class="close">&times;</span>
-        <span class="nav prev">&#10094;</span>
-        <img src="${activeImage.src}" />
-        <span class="nav next">&#10095;</span>
-      `;
-      document.body.appendChild(overlay);
-
-      const overlayImg = overlay.querySelector('img');
-
-      function updateImage(index) {
-        overlayImg.src = images[index].src;
-        currentIndex = index;
-      }
-
-      overlay.querySelector('.prev').onclick = () => updateImage((currentIndex - 1 + images.length) % images.length);
-      overlay.querySelector('.next').onclick = () => updateImage((currentIndex + 1) % images.length);
-      overlay.querySelector('.close').onclick = () => overlay.remove();
-      overlay.onclick = e => { if (e.target === overlay) overlay.remove(); };
-      document.onkeydown = e => {
-        if (e.key === 'Escape') overlay.remove();
-        if (e.key === 'ArrowLeft') overlay.querySelector('.prev').click();
-        if (e.key === 'ArrowRight') overlay.querySelector('.next').click();
-      };
-    }
-  </script>
+  <script src="../../project-editor.js"></script>
 </body>
 </html>
