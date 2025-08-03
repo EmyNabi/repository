@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Infrastructural Public Cisterns</title>
+  <link rel="stylesheet" href="../../../H&dM.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+  <script>
+    fetch('../../../header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      });
+  </script>
+
+  <main class="project-detail">
+    <h2>Infrastructural Public Cisterns</h2>
+    <p>Description and details coming soon.</p>
+
+    <!-- ✅ Your dynamic content gets inserted here -->
+    <div id="project-gallery"></div>
+  </main>
+ 
+  <!-- ✅ Load your JS logic -->
+  <script src="infrastructural_public_cisterns.js"></script>
+</body>
+</html>
