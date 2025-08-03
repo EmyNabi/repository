@@ -126,6 +126,20 @@ body.editing .project-card {
   z-index: 1;
 }
 
+.project-card .no-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  color: #666;
+  z-index: 1;
+}
+
 .project-card .project-title {
   position: relative;
   z-index: 2;
