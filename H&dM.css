@@ -259,6 +259,25 @@ body.editing .project-card {
   font-size: 1rem;
 }
 
+/* Layout Toolbar */
+.layout-toolbar {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.layout-toolbar button {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: 1px solid black;
+  background: white;
+}
+.layout-toolbar button.active {
+  background: black;
+  color: white;
+}
+
 /* PDFs (non-iframe display optional) */
 .pdf-link {
   display: flex;
@@ -316,4 +335,23 @@ body.editing .project-card {
   font-size: 2rem;
   color: white;
   cursor: pointer;
+}
+
+/* New Project Modal */
+#new-project-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+#new-project-modal .modal-content {
+  background: white;
+  padding: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

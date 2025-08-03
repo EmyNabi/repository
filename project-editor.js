@@ -27,22 +27,24 @@ function render() {
       <div class="project-text">
         <h3 contenteditable="${isAdmin}">${img.title}</h3>
         <p contenteditable="${isAdmin}">${img.description}</p>
-        ${isAdmin ? `<select class="layout-select">
-            <option value="">Default</option>
-            <option value="left">Left</option>
-            <option value="right">Right</option>
-            <option value="grid-2">Grid 2</option>
-            <option value="grid-3">Grid 3</option>
-            <option value="carousel">Carousel</option>
-          </select>` : ''}
+        ${isAdmin ? `<div class="layout-toolbar">
+            <button data-layout="">Default</button>
+            <button data-layout="left">Left</button>
+            <button data-layout="right">Right</button>
+            <button data-layout="grid-2">Grid 2</button>
+            <button data-layout="grid-3">Grid 3</button>
+            <button data-layout="carousel">Carousel</button>
+          </div>` : ''}
       </div>
     `;
     if (isAdmin) {
-      const sel = section.querySelector('.layout-select');
-      sel.value = img.layout || '';
-      sel.addEventListener('change', e => {
-        images[index].layout = e.target.value;
-        save();
+      section.querySelectorAll('.layout-toolbar button').forEach(btn => {
+        if (btn.dataset.layout === (img.layout || '')) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          images[index].layout = btn.dataset.layout;
+          render();
+          save();
+        });
       });
       section.querySelector('h3').addEventListener('input', e => {
         images[index].title = e.target.innerText;
