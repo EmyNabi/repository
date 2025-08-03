@@ -2,31 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Your Page Title</title>
-  <link rel="stylesheet" href="H&dM.css" />
+  <title>Contact</title>
+  <link rel="stylesheet" href="../H&dM.css" />
 </head>
 <body>
-
   <div id="site-header"></div>
-
+  <main>
+    <p>Nabil Davidson<br>IG: ParametricPlanning</p>
+    <p>EmaLee Davdison<br>IG: EmaLeeDavdison.arch</p>
+  </main>
   <script>
-    fetch('header.html')
+    fetch('../header.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('site-header').innerHTML = data;
       });
   </script>
-
-</body>
-</html>
-  
-   <body>
-  <main>
-    <p>Nabil Davidson</p>
-	<p>IG: ParametricPlanning</p>
-	
-	<p>EmaLee Davdison</p>
-	<p>IG: EmaLeeDavdison.arch</p>
-  </main>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Dashboard</title>
-  <link rel="stylesheet" href="../H&dM.css" />
+  <link rel="stylesheet" href="H&dM.css" />
   <style>
     .carousel {
       display: flex;
@@ -58,7 +58,7 @@
 <body>
   <div id="site-header"></div>
   <script>
-    fetch('../header.html')
+    fetch('header.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('site-header').innerHTML = data;

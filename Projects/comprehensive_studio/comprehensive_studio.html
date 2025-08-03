@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>Comprehensive Studio</title>
-  <link rel="stylesheet" href="H&dM.css" />
+  <link rel="stylesheet" href="../../H&dM.css" />
 </head>
 <body>
   <div id="site-header"></div>
   <script>
-    fetch('header.html')
+    fetch('../../header.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('site-header').innerHTML = data;
@@ -24,9 +24,9 @@
 
   <script>
     const projectKey = 'comprehensive_studio';
-    const baseImagePath = `Projects/${projectKey}/images/`;
+    const baseImagePath = 'Images/';
 
-    fetch('all-projects.json')
+    fetch('../../all-projects.json')
       .then(res => res.json())
       .then(data => {
         const images = data[projectKey];
