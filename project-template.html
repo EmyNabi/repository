@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Infrastructural Public Cisterns</title>
+  <meta charset="UTF-8" />
+  <title>{{PROJECT_KEY}}</title>
   <link rel="stylesheet" href="../../H&dM.css" />
 </head>
 <body>
@@ -10,19 +10,15 @@
   <script>
     fetch('../../header.html')
       .then(res => res.text())
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      });
+      .then(data => { document.getElementById('site-header').innerHTML = data; });
   </script>
-
-  <main class="project-detail" data-project="infrastructural_public_cisterns">
-    <h2>Infrastructural Public Cisterns</h2>
+  <main class="project-detail" data-project="{{PROJECT_KEY}}">
+    <h2>{{PROJECT_KEY}}</h2>
     <div id="dynamic-project-sections"></div>
     <div id="admin-tools" style="display:none;">
       <input type="file" id="image-upload" multiple />
     </div>
   </main>
-
   <script src="../../project-editor.js"></script>
 </body>
 </html>

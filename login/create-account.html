@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account</title>
+  <link rel="stylesheet" href="../H&dM.css">
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      border: 1px solid #000;
+      border-radius: 12px;
+      text-align: center;
+    }
+    input[type="text"], input[type="password"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      border: 1px solid black;
+      background: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Create Account</h2>
+    <input type="text" id="new-username" placeholder="Username" />
+    <input type="email" id="new-email" placeholder="Email" />
+    <input type="password" id="new-password" placeholder="Password" />
+    <button onclick="createAccount()">Create Account</button>
+    <p><a href="index.html">Back to Login</a></p>
+  </div>
+
+  <script>
+    function createAccount() {
+      const username = document.getElementById('new-username').value;
+      const password = document.getElementById('new-password').value;
+      const email = document.getElementById('new-email').value;
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      users.push({ username, password, email, isAdmin: false });
+      localStorage.setItem('users', JSON.stringify(users));
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,116 +1,122 @@
 {
-  "comprehensive_studio": [
-    {
-      "filename": "250317_Rhino_Render_Final.jpg",
-      "title": "Rhino Render Final",
-      "description": "Final Rhino render demonstrating materials and lighting."
-    },
-    {
-      "filename": "+15mm_Interior_Color_Corrected_with_people.jpg",
-      "title": "Interior Color Corrected",
-      "description": "Interior rendering with post-processed color correction and human scale."
-    },
-    {
-      "filename": "+_12mm_Interiorn_Middle_front_2-Reflections.jpg",
-      "title": "Interior Reflection",
-      "description": "Early reflection render from the middle front perspective."
-    },
-    {
-      "filename": "+Tube_B-Art.jpg",
-      "title": "Tube B Art",
-      "description": "Artistic representation of spatial circulation through Tube B."
-    },
-    {
-      "filename": "2501_Comprehensive_Studio_Building_Sections_Semi_Final-01.jpg",
-      "title": "Building Sections Semi Final",
-      "description": "Finalized sectional studies showcasing structure and circulation."
-    },
-    {
-      "filename": "2501_Floor_Plans_Final_Page_1.jpg",
-      "title": "Floor Plan Page 1",
-      "description": "Comprehensive floor plan layout for the first level."
-    },
-    {
-      "filename": "2501_Floor_Plans_Final_Page_3.jpg",
-      "title": "Floor Plan Page 3",
-      "description": "Detailed floor plan layout for the third level."
-    },
-    {
-      "filename": "Diagram_RoofSection_AnglesRadii-01.jpg",
-      "title": "Roof Section Diagram",
-      "description": "Diagram analyzing roof angles and radii."
-    },
-    {
-      "filename": "GenAIImage_929d9f6a-c61f-4bca-9f0b-df6f311990cf.jpeg",
-      "title": "AI Image 1",
-      "description": "AI-generated conceptual image exploring form and space."
-    }
-  ],
-  "infrastructural_public_cisterns": [
-    {
-      "filename": "IMG_8681.png",
-      "title": "Water Entry Elevation",
-      "description": "Illustrates the entry sequence of the cistern."
-    },
-    {
-      "filename": "Geological Diagram 1.jpg",
-      "title": "Geological Diagram",
-      "description": "Geological site section showing cistern location."
-    },
-    {
-      "filename": "241207_Render Photography 1.5_Post Proccess.png",
-      "title": "Render Photography 1.5",
-      "description": "Post-processed rendering of the cistern site."
-    },
-    {
-      "filename": "241207_Render Photography 2_Post Proccess_Shadow.png",
-      "title": "Render Photography 2 with Shadow",
-      "description": "Second perspective render with emphasized shadows."
-    },
-    {
-      "filename": "Enlarged Drawing-01-01.jpg",
-      "title": "Enlarged Drawing",
-      "description": "Detailed view of cistern assembly."
-    },
-    {
-      "filename": "Floor Plan Iterations-02.jpg",
-      "title": "Floor Plan Iterations",
-      "description": "Plan drawings comparing layout schemes."
-    },
-    {
-      "filename": "IMG_7627.png",
-      "title": "Site Context Image 1",
-      "description": "Photo documenting material conditions at site."
-    },
-    {
-      "filename": "IMG_7681.JPG",
-      "title": "Site Context Image 2",
-      "description": "On-site photograph during early design phase."
-    },
-    {
-      "filename": "MArch-SP24-4011-TC-Feghali-Davidson-Nabil-RN-03.jpg",
-      "title": "Final Board Layout",
-      "description": "Rendered final board showing full project presentation."
-    },
-    {
-      "filename": "Section 1_240712_Final Links to Indesign-01-01.jpg",
-      "title": "Section 1 Drawing",
-      "description": "Final section drawing exported from InDesign."
-    },
-    {
-      "filename": "Section 3_240712_Final Links to Indesign-01-01-01-01-01.jpg",
-      "title": "Section 3 Drawing",
-      "description": "Compositional study of sectional moments."
-    },
-    {
-      "filename": "DIAGRAMs.pdf",
-      "title": "Project Diagrams",
-      "description": "PDF compilation of conceptual and tectonic diagrams."
-    },
-    {
-      "filename": "413_Final_Template [Recovered].pdf",
-      "title": "Final Presentation Template",
-      "description": "PDF template used for presentation layout and formatting."
-    }
-  ]
+  "comprehensive_studio": {
+    "cover": "250317_Rhino_Render_Final.jpg",
+    "images": [
+      {
+        "filename": "250317_Rhino_Render_Final.jpg",
+        "title": "Rhino Render Final",
+        "description": "Final Rhino render demonstrating materials and lighting."
+      },
+      {
+        "filename": "+15mm_Interior_Color_Corrected_with_people.jpg",
+        "title": "Interior Color Corrected",
+        "description": "Interior rendering with post-processed color correction and human scale."
+      },
+      {
+        "filename": "+_12mm_Interiorn_Middle_front_2-Reflections.jpg",
+        "title": "Interior Reflection",
+        "description": "Early reflection render from the middle front perspective."
+      },
+      {
+        "filename": "+Tube_B-Art.jpg",
+        "title": "Tube B Art",
+        "description": "Artistic representation of spatial circulation through Tube B."
+      },
+      {
+        "filename": "2501_Comprehensive_Studio_Building_Sections_Semi_Final-01.jpg",
+        "title": "Building Sections Semi Final",
+        "description": "Finalized sectional studies showcasing structure and circulation."
+      },
+      {
+        "filename": "2501_Floor_Plans_Final_Page_1.jpg",
+        "title": "Floor Plan Page 1",
+        "description": "Comprehensive floor plan layout for the first level."
+      },
+      {
+        "filename": "2501_Floor_Plans_Final_Page_3.jpg",
+        "title": "Floor Plan Page 3",
+        "description": "Detailed floor plan layout for the third level."
+      },
+      {
+        "filename": "Diagram_RoofSection_AnglesRadii-01.jpg",
+        "title": "Roof Section Diagram",
+        "description": "Diagram analyzing roof angles and radii."
+      },
+      {
+        "filename": "conceptual_image_929d9f6a-c61f-4bca-9f0b-df6f311990cf.jpeg",
+        "title": "Conceptual Image 1",
+        "description": "Conceptual image exploring form and space."
+      }
+    ]
+  },
+  "infrastructural_public_cisterns": {
+    "cover": "IMG_8681.png",
+    "images": [
+      {
+        "filename": "IMG_8681.png",
+        "title": "Water Entry Elevation",
+        "description": "Illustrates the entry sequence of the cistern."
+      },
+      {
+        "filename": "Geological Diagram 1.jpg",
+        "title": "Geological Diagram",
+        "description": "Geological site section showing cistern location."
+      },
+      {
+        "filename": "241207_Render Photography 1.5_Post Proccess.png",
+        "title": "Render Photography 1.5",
+        "description": "Post-processed rendering of the cistern site."
+      },
+      {
+        "filename": "241207_Render Photography 2_Post Proccess_Shadow.png",
+        "title": "Render Photography 2 with Shadow",
+        "description": "Second perspective render with emphasized shadows."
+      },
+      {
+        "filename": "Enlarged Drawing-01-01.jpg",
+        "title": "Enlarged Drawing",
+        "description": "Detailed view of cistern assembly."
+      },
+      {
+        "filename": "Floor Plan Iterations-02.jpg",
+        "title": "Floor Plan Iterations",
+        "description": "Plan drawings comparing layout schemes."
+      },
+      {
+        "filename": "IMG_7627.png",
+        "title": "Site Context Image 1",
+        "description": "Photo documenting material conditions at site."
+      },
+      {
+        "filename": "IMG_7681.JPG",
+        "title": "Site Context Image 2",
+        "description": "On-site photograph during early design phase."
+      },
+      {
+        "filename": "MArch-SP24-4011-TC-Feghali-Davidson-Nabil-RN-03.jpg",
+        "title": "Final Board Layout",
+        "description": "Rendered final board showing full project presentation."
+      },
+      {
+        "filename": "Section 1_240712_Final Links to Indesign-01-01.jpg",
+        "title": "Section 1 Drawing",
+        "description": "Final section drawing exported from InDesign."
+      },
+      {
+        "filename": "Section 3_240712_Final Links to Indesign-01-01-01-01-01.jpg",
+        "title": "Section 3 Drawing",
+        "description": "Compositional study of sectional moments."
+      },
+      {
+        "filename": "DIAGRAMs.pdf",
+        "title": "Project Diagrams",
+        "description": "PDF compilation of conceptual and tectonic diagrams."
+      },
+      {
+        "filename": "413_Final_Template [Recovered].pdf",
+        "title": "Final Presentation Template",
+        "description": "PDF template used for presentation layout and formatting."
+      }
+    ]
+  }
 }
