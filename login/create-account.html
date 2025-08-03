@@ -52,12 +52,14 @@
     let generatedCode = '';
     function sendCode() {
       const email = document.getElementById('new-email').value;
-      generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
       fetch('send_verification_email.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, code: generatedCode })
-      }).then(() => {
+        body: JSON.stringify({ email: email })
+      })
+      .then(response => response.json())
+      .then(data => {
+        generatedCode = data.code;
         document.getElementById('verification-section').style.display = 'block';
       });
     }
