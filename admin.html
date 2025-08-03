@@ -47,7 +47,7 @@
         if (user === 'admin' && pass === 'admin') {
           // Persist admin status so restricted features can be enabled
           localStorage.setItem('isAdmin', 'true');
-          window.location.href = 'Projects.html'; // or dashboard.html
+          window.location.href = 'Projects/Projects.html';
         } else {
           document.getElementById('error-message').textContent = 'Invalid credentials';
         }
