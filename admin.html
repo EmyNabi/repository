@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="H&dM.css">
+  <style>
+    .admin-login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      border: 1px solid #000;
+      border-radius: 12px;
+      text-align: center;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      border: 1px solid black;
+      background: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-login-container">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="error-message" style="color:red;"></p>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      if (user === 'admin' && pass === 'admin') {
+        console.log(localStorage.getItem('isAdmin'));
+		console.log("Trying to log in", user, pass);
+		console.log("Redirecting to Projects.html...");
+        window.location.href = 'Projects.html'; // or dashboard.html
+      } else {
+        document.getElementById('error-message').textContent = 'Invalid credentials';
+      }
+    }
+  </script>
+</body>
+</html>

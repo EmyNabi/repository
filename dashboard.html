@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../H&dM.css" />
+  <style>
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+    }
+    .project-card {
+      scroll-snap-align: start;
+      min-width: 300px;
+      flex-shrink: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .project-card img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
+    .editor {
+      margin-top: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+    }
+    .editable-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      gap: 20px;
+    }
+    .editable-section img {
+      max-width: 300px;
+      max-height: 300px;
+      object-fit: contain;
+    }
+    .editable-section input,
+    .editable-section textarea {
+      width: 100%;
+      max-width: 400px;
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <script>
+    fetch('../header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      });
+  </script>
+
+  <h2>Project Dashboard</h2>
+  <div class="carousel" id="project-carousel">
+    <div class="project-card" data-type="new">
+      <strong>➕ New Project</strong>
+    </div>
+    <!-- Existing projects dynamically inserted here -->
+    <div class="project-card" data-type="hide">
+      <strong>🚫 Hide a Project</strong>
+    </div>
+  </div>
+
+  <div id="editor" class="editor" style="display: none;">
+    <h3>Edit Project</h3>
+    <input type="text" id="project-title" placeholder="Project Title" />
+    <input type="text" id="project-author" placeholder="Author" />
+    <div id="editable-gallery"></div>
+    <input type="file" id="file-upload" multiple />
+    <button onclick="saveProject()">💾 Save</button>
+  </div>
+
+  <script>
+    document.querySelector('[data-type="new"]').addEventListener('click', () => {
+      document.getElementById('editor').style.display = 'block';
+      document.getElementById('editable-gallery').innerHTML = '';
+    });
+
+    document.getElementById('file-upload').addEventListener('change', e => {
+      const container = document.getElementById('editable-gallery');
+      [...e.target.files].forEach(file => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const div = document.createElement('div');
+          div.className = 'editable-section';
+          div.setAttribute('draggable', true);
+          div.innerHTML = `
+            <img src="${reader.result}" />
+            <div>
+              <input type="text" placeholder="Image Title" />
+              <textarea placeholder="Description"></textarea>
+            </div>
+          `;
+          container.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    function saveProject() {
+      alert("🔄 Auto-save functionality to be added with backend!");
+    }
+
+    let dragged;
+    document.addEventListener("dragstart", e => {
+      dragged = e.target;
+      e.target.style.opacity = .5;
+    });
+    document.addEventListener("dragend", e => {
+      e.target.style.opacity = "";
+    });
+    document.addEventListener("dragover", e => {
+      e.preventDefault();
+    });
+    document.addEventListener("drop", e => {
+      e.preventDefault();
+      if (e.target.closest('.editable-section') && dragged !== e.target.closest('.editable-section')) {
+        const dropTarget = e.target.closest('.editable-section');
+        dropTarget.parentNode.insertBefore(dragged, dropTarget.nextSibling);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Page Title</title>
+  <link rel="stylesheet" href="H&dM.css" />
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <script>
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      });
+  </script>
+
+</body>
+</html>
+
+<body>
+This feature is a work in progress. COME BACK SOON!
+</body>

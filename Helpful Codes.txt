@@ -1,0 +1,18 @@
+Helpful codes to have
+
+
+/*Directory*/
+cd Desktop\Second-Site
+
+
+/*Launch Site*/
+python -m http.server 8080
+
+
+/*Link to site*/
+http://localhost:8080/SecondSiteIndex2.html
+
+
+/* Home */
+
+<a href="SecondSiteIndex2.html">Home</a>

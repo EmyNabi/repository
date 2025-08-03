@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Page Title</title>
+  <link rel="stylesheet" href="H&dM.css" />
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <div id="site-header"></div>
+
+  <!-- Main Content -->
+  <main>
+    <p>Welcome to your site. More coming soon.</p>
+  </main>
+
+  <!-- Load navigation from header.html -->
+  <script>
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 40px 30px 40px;
+  flex-wrap: nowrap;
+}
+header h1 {
+  font-size: 2rem;
+  white-space: nowrap;
+  margin-right: 40px;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+nav a {
+  text-decoration: none;
+  white-space: nowrap;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  background-color: black;
+  color: white;
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Project Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* increased card min-width */
+  gap: 50px; /* more space between cards */
+  padding: 60px; /* more padding around grid */
+  justify-items: center;
+}
+
+/* Project Card */
+.project-card {
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  background: white;
+  border: none; /* Removed the border */
+  text-decoration: none;
+  color: black;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Start with no shadow */
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2); /* Raised card on hover */
+}
+
+.project-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.project-card .project-title {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 12px;
+  font-size: 1.1rem; /* slightly larger text */
+  text-align: center;
+}
+
+
+/* Project Filter Controls */
+.controls-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 10px;
+  font-size: 1.5rem;
+}
+.left-controls,
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.view-toggle {
+  cursor: pointer;
+  font-weight: 400;
+}
+.view-toggle.active {
+  font-weight: bold;
+}
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 6px;
+  font-weight: 600;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid black;
+  top: 120%;
+  left: 0;
+  z-index: 1000;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.dropdown-menu div {
+  padding: 5px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.search-group input {
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 3px 6px;
+  background: none;
+  color: black;
+  min-width: 150px;
+  font-size: 1.3rem;
+}
+.search-group input:focus {
+  outline: none;
+  border-bottom: 2px solid black;
+}
+
+/* Project Detail Page (Images + Text) */
+.project-section {
+  display: flex;
+  justify-content: center;       /* Centers entire content block */
+  align-items: center;           /* Vertically center text to image */
+  margin-bottom: 60px;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.project-section img {
+  max-width: 50%;
+  max-height: 900px;   /* Limit tall images */
+  height: auto;
+  width: auto;
+  object-fit: contain; /* Prevents cropping */
+}
+
+.project-text {
+  max-width: 500px;
+  flex: 1;
+  padding-top: 10px;
+  font-size: 1rem;
+}
+
+/* PDFs (non-iframe display optional) */
+.pdf-link {
+  display: flex;
+  align-items: center;
+  margin: 30px auto;
+  max-width: 900px;
+  font-size: 1rem;
+}
+.pdf-link a {
+  text-decoration: underline;
+  color: black;
+}
+
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-overlay .nav {
+  position: absolute;
+  top: 50%;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  transform: translateY(-50%);
+  padding: 0 20px;
+}
+
+.lightbox-overlay .prev {
+  left: 0;
+}
+
+.lightbox-overlay .next {
+  right: 0;
+}
+
+.lightbox-overlay .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
