@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../H&dM.css">
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      border: 1px solid #000;
+      border-radius: 12px;
+      text-align: center;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      border: 1px solid black;
+      background: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="error-message" style="color:red;"></p>
+    <p><a href="create-account.html">Create Account</a></p>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const user = users.find(u => u.username === username && u.password === password);
+      if (user) {
+        if (user.isAdmin) {
+          localStorage.setItem('isAdmin', 'true');
+          window.location.href = '../Projects/Projects.html';
+        } else {
+          localStorage.removeItem('isAdmin');
+          window.location.href = '../index.html';
+        }
+      } else {
+        document.getElementById('error-message').textContent = 'Invalid credentials';
+      }
+    }
+  </script>
+</body>
+</html>
