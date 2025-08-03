@@ -28,9 +28,6 @@
       background: black;
       color: white;
     }
-    #verification-section {
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -39,43 +36,19 @@
     <input type="text" id="new-username" placeholder="Username" />
     <input type="email" id="new-email" placeholder="Email" />
     <input type="password" id="new-password" placeholder="Password" />
-    <button onclick="sendCode()">Send Verification Code</button>
-    <div id="verification-section">
-      <input type="text" id="verification-code" placeholder="Verification Code" />
-      <button onclick="verifyCode()">Verify</button>
-      <p id="verification-message" style="color:red;"></p>
-    </div>
+    <button onclick="createAccount()">Create Account</button>
     <p><a href="index.html">Back to Login</a></p>
   </div>
 
   <script>
-    let generatedCode = '';
-    function sendCode() {
+    function createAccount() {
+      const username = document.getElementById('new-username').value;
+      const password = document.getElementById('new-password').value;
       const email = document.getElementById('new-email').value;
-      fetch('send_verification_email.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email })
-      })
-      .then(response => response.json())
-      .then(data => {
-        generatedCode = data.code;
-        document.getElementById('verification-section').style.display = 'block';
-      });
-    }
-    function verifyCode() {
-      const entered = document.getElementById('verification-code').value;
-      if (entered === generatedCode) {
-        const username = document.getElementById('new-username').value;
-        const password = document.getElementById('new-password').value;
-        const email = document.getElementById('new-email').value;
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        users.push({ username, password, email, isAdmin: false });
-        localStorage.setItem('users', JSON.stringify(users));
-        window.location.href = 'index.html';
-      } else {
-        document.getElementById('verification-message').textContent = 'Invalid code';
-      }
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      users.push({ username, password, email, isAdmin: false });
+      localStorage.setItem('users', JSON.stringify(users));
+      window.location.href = 'index.html';
     }
   </script>
 </body>
