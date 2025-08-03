@@ -74,7 +74,7 @@
           alert('Project already exists');
           return;
         }
-        projectEntries.push([key, []]);
+        projectEntries.push([key, { images: [], cover: '' }]);
         renderProjects();
         saveOrder();
         fetch('../create-project.php', {
@@ -88,15 +88,18 @@
 
     function renderProjects() {
       container.innerHTML = '';
-      projectEntries.forEach(([projectKey, images]) => {
+      projectEntries.forEach(([projectKey, data]) => {
+        const images = data.images || [];
         const card = document.createElement('a');
         card.href = `${projectKey}/${projectKey}.html`;
         card.className = 'project-card';
 
         let content = '';
-        if (images.length > 0) {
-          const thumbnail = `${projectKey}/Images/${images[0].filename}`;
-          content += `<img src="${thumbnail}" alt="${images[0].title}">`;
+        const coverFile = data.cover || (images[0] && images[0].filename);
+        if (coverFile) {
+          const coverImg = images.find(img => img.filename === coverFile) || {};
+          const thumbnail = `${projectKey}/Images/${coverFile}`;
+          content += `<img src="${thumbnail}" alt="${coverImg.title || ''}">`;
         } else {
           content += `<div class="no-image">No Image</div>`;
         }
@@ -113,7 +116,12 @@
     fetch('../all-projects.json')
       .then(response => response.json())
       .then(data => {
-        projectEntries = Object.entries(data);
+        projectEntries = Object.entries(data).map(([key, value]) => {
+          if (Array.isArray(value)) {
+            return [key, { images: value, cover: value[0]?.filename || '' }];
+          }
+          return [key, value];
+        });
         renderProjects();
       })
       .catch(error => {
@@ -144,8 +152,8 @@
 
     function saveOrder() {
       const ordered = {};
-      projectEntries.forEach(([key, images]) => {
-        ordered[key] = images;
+      projectEntries.forEach(([key, data]) => {
+        ordered[key] = data;
       });
       fetch('../save-projects.php', {
         method: 'POST',

@@ -225,6 +225,9 @@ body.editing .project-card {
   gap: 40px;
   flex-wrap: wrap;
 }
+.project-section.cover {
+  outline: 3px dashed #ffa500;
+}
 .project-section.left {
   flex-direction: row;
 }
