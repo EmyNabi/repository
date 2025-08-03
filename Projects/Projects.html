@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projects</title>
+  <link rel="stylesheet" href="H&dM.css" />
+</head>
+<body>
+  <!-- Header will be injected here -->
+  <div id="site-header"></div>
+  <script>
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      });
+  </script>
+
+  <main>
+    <div class="projects-grid" id="projects-container"></div>
+  </main>
+
+  <script>
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+    fetch('all-projects.json')
+      .then(response => response.json())
+      .then(projectsData => {
+        const container = document.getElementById('projects-container');
+
+        Object.entries(projectsData).forEach(([projectKey, images]) => {
+          if (images.length === 0) return;
+
+          // Use the first image as thumbnail
+          const thumbnail = `Projects/${projectKey}/images/${images[0].filename}`;
+          const card = document.createElement('a');
+          card.href = `${projectKey}.html`;
+          card.className = 'project-card';
+          card.style.position = 'relative';
+
+          card.innerHTML = `
+            <img src="${thumbnail}" alt="${images[0].title}">
+            <div class="project-title" contenteditable="${isAdmin}">${projectKey.replace(/_/g, ' ')}</div>
+            ${isAdmin ? `<button class="edit-button" data-project="${projectKey}">✏️</button>` : ''}
+          `;
+
+          container.appendChild(card);
+        });
+
+        if (isAdmin) {
+          const style = document.createElement('style');
+          style.textContent = `
+            .edit-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              background: rgba(255,255,255,0.9);
+              border: none;
+              cursor: pointer;
+              font-size: 1rem;
+              padding: 4px 8px;
+              border-radius: 6px;
+              z-index: 2;
+            }
+          `;
+          document.head.appendChild(style);
+        }
+      })
+      .catch(error => {
+        console.error("Error loading all-projects.json:", error);
+      });
+  </script>
+</body>
+</html>
