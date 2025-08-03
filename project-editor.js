@@ -10,16 +10,27 @@ fetch('../../all-projects.json')
   .then(res => res.json())
   .then(data => {
     allProjects = data;
-    images = allProjects[projectKey] || [];
+    let projectData = allProjects[projectKey];
+    if (Array.isArray(projectData)) {
+      projectData = { images: projectData, cover: projectData[0]?.filename || '' };
+      allProjects[projectKey] = projectData;
+    }
+    if (!projectData) {
+      projectData = { images: [], cover: '' };
+      allProjects[projectKey] = projectData;
+    }
+    images = projectData.images;
     render();
     if (isAdmin) setupAdmin();
   });
 
 function render() {
   container.innerHTML = '';
+  const cover = allProjects[projectKey].cover;
   images.forEach((img, index) => {
     const section = document.createElement('div');
-    section.className = 'project-section ' + (img.layout || '');
+    const isCover = cover === img.filename;
+    section.className = 'project-section ' + (img.layout || '') + (isCover ? ' cover' : '');
     section.draggable = isAdmin;
     section.dataset.index = index;
     section.innerHTML = `
@@ -34,7 +45,8 @@ function render() {
             <button data-layout="grid-2">Grid 2</button>
             <button data-layout="grid-3">Grid 3</button>
             <button data-layout="carousel">Carousel</button>
-          </div>` : ''}
+          </div>
+          <button class="set-cover">${isCover ? 'Cover Image' : 'Set Cover'}</button>` : ''}
       </div>
     `;
     if (isAdmin) {
@@ -46,6 +58,15 @@ function render() {
           save();
         });
       });
+      const coverBtn = section.querySelector('.set-cover');
+      coverBtn.addEventListener('click', () => {
+        allProjects[projectKey].cover = img.filename;
+        save();
+        render();
+      });
+      if (isCover) {
+        coverBtn.disabled = true;
+      }
       section.querySelector('h3').addEventListener('input', e => {
         images[index].title = e.target.innerText;
         save();
@@ -77,7 +98,10 @@ function handleUpload(e) {
     .then(res => res.json())
     .then(newItems => {
       images.push(...newItems);
-      allProjects[projectKey] = images;
+      allProjects[projectKey].images = images;
+      if (!allProjects[projectKey].cover && newItems[0]) {
+        allProjects[projectKey].cover = newItems[0].filename;
+      }
       render();
       save();
     });
@@ -100,7 +124,7 @@ function drop(e) {
 }
 
 function save() {
-  allProjects[projectKey] = images;
+  allProjects[projectKey].images = images;
   fetch('../../save-projects.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
