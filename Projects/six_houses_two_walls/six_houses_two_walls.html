@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Six Houses Two Walls</title>
+  <link rel="stylesheet" href="../../H&dM.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+  <script>
+    fetch('../../header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      });
+  </script>
+
+  <main class="project-detail" data-project="six_houses_two_walls">
+    <h2>Six Houses Two Walls</h2>
+    <div id="dynamic-project-sections"></div>
+    <div id="admin-tools" style="display:none;">
+      <input type="file" id="image-upload" multiple />
+    </div>
+  </main>
+
+  <script src="../../project-editor.js"></script>
+</body>
+</html>
