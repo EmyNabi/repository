@@ -19,6 +19,12 @@ function loadHeader(path, callback) {
         if (loginLink) loginLink.style.display = 'inline';
         if (logoutLink) logoutLink.style.display = 'none';
       }
+      if (!document.getElementById('responsive-images-script')) {
+        const script = document.createElement('script');
+        script.src = '/repository/responsive-images.js';
+        script.id = 'responsive-images-script';
+        document.head.appendChild(script);
+      }
       if (callback) callback(isAdmin);
     });
 }
