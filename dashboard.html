@@ -57,12 +57,9 @@
 </head>
 <body>
   <div id="site-header"></div>
+  <script src="/repository/header.js"></script>
   <script>
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      });
+    loadHeader('header.html');
   </script>
 
   <h2>Project Dashboard</h2>

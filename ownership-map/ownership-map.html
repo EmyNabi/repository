@@ -10,12 +10,9 @@
   <main>
     <p>This feature is a work in progress. COME BACK SOON!</p>
   </main>
+  <script src="/repository/header.js"></script>
   <script>
-    fetch('../header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      });
+    loadHeader('../header.html');
   </script>
 </body>
 </html>

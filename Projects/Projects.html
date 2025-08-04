@@ -12,24 +12,22 @@
     <div class="projects-grid" id="projects-container"></div>
   </main>
 
+  <script src="/repository/header.js"></script>
   <script>
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
-    fetch('../header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-        if (isAdmin) {
-          const icon = document.getElementById('edit-icon');
-          if (icon) {
-            icon.style.display = 'block';
-            icon.addEventListener('click', () => {
-              document.body.classList.toggle('editing');
-              renderProjects();
-            });
-          }
+    loadHeader('../header.html', () => {
+      if (isAdmin) {
+        const icon = document.getElementById('edit-icon');
+        if (icon) {
+          icon.style.display = 'block';
+          icon.addEventListener('click', () => {
+            document.body.classList.toggle('editing');
+            renderProjects();
+          });
         }
-      });
+      }
+    });
 
     let projectEntries = [];
     const container = document.getElementById('projects-container');
