@@ -80,6 +80,7 @@ function render() {
       section.addEventListener('drop', drop);
     }
     container.appendChild(section);
+    if (window.applyResponsiveImages) applyResponsiveImages(section);
   });
 }
 
