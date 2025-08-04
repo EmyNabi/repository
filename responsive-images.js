@@ -20,11 +20,22 @@ function applyResponsiveImages(root = document) {
 
     const displayWidth = img.clientWidth || (img.parentElement ? img.parentElement.clientWidth : window.innerWidth);
 
-    img.srcset = srcset;
-    img.sizes = `${displayWidth}px`;
-    img.src = `/repository/resize.php?src=${encodeURIComponent(path)}&w=640`;
+    const placeholder = `/repository/resize.php?src=${encodeURIComponent(path)}&w=20`;
+
+    img.classList.add('lazy-image');
+    const onLoad = () => {
+      if (!img.currentSrc.includes('w=20')) {
+        img.classList.add('loaded');
+        img.removeEventListener('load', onLoad);
+      }
+    };
+    img.addEventListener('load', onLoad);
+
     img.loading = 'lazy';
     img.decoding = 'async';
+    img.src = placeholder;
+    img.srcset = srcset;
+    img.sizes = `${displayWidth}px`;
   });
 }
 
