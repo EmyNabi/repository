@@ -10,8 +10,9 @@ body {
   background-color: #ffffff;
   color: #000000;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 10px;
+  border: 1px solid #000;
   padding: 20px;
-  margin-top: 40px;
 }
 
 /* Header */
@@ -248,18 +249,16 @@ body.editing .project-card {
   gap: 20px;
 }
 .project-section img {
-  max-width: 50%;
+  max-width: 100%;
+  width: 100%;
   max-height: 900px;   /* Limit tall images */
   height: auto;
-  width: auto;
   object-fit: contain; /* Prevents cropping */
 }
 
+/* Hide placeholder text blocks so images can center */
 .project-text {
-  max-width: 500px;
-  flex: 1;
-  padding-top: 10px;
-  font-size: 1rem;
+  display: none;
 }
 
 /* Layout Toolbar */
