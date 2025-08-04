@@ -31,7 +31,22 @@ if (!document.getElementById('responsive-images-script')) {
   document.head.appendChild(script);
 }
 
+function initImageFadeIn(root = document) {
+  const imgs = root.querySelectorAll('img');
+  imgs.forEach(img => {
+    img.style.opacity = '0';
+    img.style.transition = 'opacity 0.5s ease-in';
+    const show = () => { img.style.opacity = '1'; };
+    if (img.complete) {
+      requestAnimationFrame(show);
+    } else {
+      img.addEventListener('load', show, { once: true });
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  loadHeader();
+  loadHeader(() => initImageFadeIn(document.getElementById('site-header')));
+  initImageFadeIn();
 });
 
