@@ -6,7 +6,7 @@ let allProjects = {};
 let images = [];
 let dragIndex = null;
 
-fetch('../../list-projects.php')
+fetch('../../all-projects.json')
   .then(res => res.json())
   .then(data => {
     allProjects = data;
