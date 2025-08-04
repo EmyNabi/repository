@@ -1,6 +1,7 @@
 <?php
 $src = $_GET['src'] ?? '';
 $w = intval($_GET['w'] ?? 0);
+$format = $_GET['format'] ?? '';
 if (!$src || $w <= 0) {
     http_response_code(400);
     exit('bad request');
@@ -44,16 +45,21 @@ if ($mime === 'image/png') {
     imagesavealpha($dst, true);
 }
 imagecopyresampled($dst, $srcImg, 0, 0, 0, 0, $w, $h, $origW, $origH);
-header('Content-Type: ' . $mime);
-switch ($mime) {
-    case 'image/png':
-        imagepng($dst);
-        break;
-    case 'image/gif':
-        imagegif($dst);
-        break;
-    default:
-        imagejpeg($dst, null, 85);
+$mimeOut = ($format === 'webp') ? 'image/webp' : $mime;
+header('Content-Type: ' . $mimeOut);
+if ($format === 'webp') {
+    imagewebp($dst, null, 85);
+} else {
+    switch ($mime) {
+        case 'image/png':
+            imagepng($dst);
+            break;
+        case 'image/gif':
+            imagegif($dst);
+            break;
+        default:
+            imagejpeg($dst, null, 85);
+    }
 }
 imagedestroy($srcImg);
 imagedestroy($dst);
