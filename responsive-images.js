@@ -18,14 +18,15 @@ function applyResponsiveImages(root = document) {
     path = path.replace(/^repository\//, '');
     img.src = `/repository/resize.php?src=${encodeURIComponent(path)}&w=${targetWidth}`;
     img.loading = 'lazy';
+    img.decoding = 'async';
   });
 }
 function initResponsiveImages() {
   applyResponsiveImages();
   window.addEventListener('resize', () => applyResponsiveImages());
 }
-if (document.readyState === 'complete') {
+if (document.readyState !== 'loading') {
   initResponsiveImages();
 } else {
-  window.addEventListener('load', initResponsiveImages);
+  document.addEventListener('DOMContentLoaded', initResponsiveImages);
 }
