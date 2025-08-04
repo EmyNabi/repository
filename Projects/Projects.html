@@ -111,7 +111,7 @@
       });
     }
 
-      fetch('../list-projects.php')
+      fetch('../all-projects.json')
       .then(response => response.json())
       .then(data => {
         projectEntries = Object.entries(data).map(([key, value]) => {
@@ -123,7 +123,7 @@
         renderProjects();
       })
       .catch(error => {
-        console.error('Error loading list-projects.php:', error);
+        console.error('Error loading all-projects.json:', error);
       });
 
     document.addEventListener('dragstart', e => {
