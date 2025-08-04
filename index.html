@@ -16,12 +16,9 @@
   </main>
 
   <!-- Load navigation from header.html -->
+  <script src="/repository/header.js"></script>
   <script>
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('site-header').innerHTML = data;
-      });
+    loadHeader('header.html');
   </script>
 
 </body>
