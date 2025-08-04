@@ -1,5 +1,5 @@
-function loadHeader(path, callback) {
-  fetch(path)
+function loadHeader(callback) {
+  fetch('/repository/header.html')
     .then(res => res.text())
     .then(html => {
       document.getElementById('site-header').innerHTML = html;
@@ -19,12 +19,19 @@ function loadHeader(path, callback) {
         if (loginLink) loginLink.style.display = 'inline';
         if (logoutLink) logoutLink.style.display = 'none';
       }
-      if (!document.getElementById('responsive-images-script')) {
-        const script = document.createElement('script');
-        script.src = '/repository/responsive-images.js';
-        script.id = 'responsive-images-script';
-        document.head.appendChild(script);
-      }
       if (callback) callback(isAdmin);
     });
 }
+
+if (!document.getElementById('responsive-images-script')) {
+  const script = document.createElement('script');
+  script.src = '/repository/responsive-images.js';
+  script.defer = true;
+  script.id = 'responsive-images-script';
+  document.head.appendChild(script);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadHeader();
+});
+
