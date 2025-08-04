@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Casework in Munich</title>
+  <link rel="stylesheet" href="../../H&dM.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+  <script>
+    fetch('../../header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('site-header').innerHTML = data;
+      });
+  </script>
+
+  <main class="project-detail" data-project="Casework in Munich">
+    <h2>Casework in Munich</h2>
+    <div id="dynamic-project-sections"></div>
+    <div id="admin-tools" style="display:none;">
+      <input type="file" id="image-upload" multiple />
+    </div>
+  </main>
+
+  <script src="../../project-editor.js"></script>
+</body>
+</html>
