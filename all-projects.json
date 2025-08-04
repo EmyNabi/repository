@@ -3,19 +3,9 @@
     "cover": "250317_Rhino_Render_Final.jpg",
     "images": [
       {
-        "filename": "250317_Rhino_Render_Final.jpg",
-        "title": "Rhino Render Final",
-        "description": "Final Rhino render demonstrating materials and lighting."
-      },
-      {
         "filename": "+15mm_Interior_Color_Corrected_with_people.jpg",
         "title": "Interior Color Corrected",
         "description": "Interior rendering with post-processed color correction and human scale."
-      },
-      {
-        "filename": "+_12mm_Interiorn_Middle_front_2-Reflections.jpg",
-        "title": "Interior Reflection",
-        "description": "Early reflection render from the middle front perspective."
       },
       {
         "filename": "+Tube_B-Art.jpg",
@@ -23,9 +13,24 @@
         "description": "Artistic representation of spatial circulation through Tube B."
       },
       {
+        "filename": "+_12mm_Interiorn_Middle_front_2-Reflections.jpg",
+        "title": "Interior Reflection",
+        "description": "Early reflection render from the middle front perspective."
+      },
+      {
+        "filename": "2501_414_Studio_Desk_Critique_250203.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
         "filename": "2501_Comprehensive_Studio_Building_Sections_Semi_Final-01.jpg",
         "title": "Building Sections Semi Final",
         "description": "Finalized sectional studies showcasing structure and circulation."
+      },
+      {
+        "filename": "2501_Comprehensive_Studio_Building_Sections_Semi_Final.pdf",
+        "title": "",
+        "description": ""
       },
       {
         "filename": "2501_Floor_Plans_Final_Page_1.jpg",
@@ -38,9 +43,204 @@
         "description": "Detailed floor plan layout for the third level."
       },
       {
+        "filename": "250204_Foam_Model_Ink_Cros_Sections.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250204_Foam_Model_Plans.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250204_Foam_Model_Sections.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250223_Pin_Up_Massing_Model.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250317_Rhino_Render_Final.jpg",
+        "title": "Rhino Render Final",
+        "description": "Final Rhino render demonstrating materials and lighting."
+      },
+      {
+        "filename": "A.UD_414-415_Massing_Model_Diagram_5.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Diagram_Roof.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
         "filename": "Diagram_RoofSection_AnglesRadii-01.jpg",
         "title": "Roof Section Diagram",
         "description": "Diagram analyzing roof angles and radii."
+      },
+      {
+        "filename": "GenAIImage_04482990-1b82-4486-8e4a-e8c37a15d006.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_3949ac89-0551-4a16-ba2f-cd5520a4fb09.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_42e90555-c78e-40dc-a303-b9190ac8c816.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_4330cbd8-eb0a-4a13-b74d-d9e6df250a31.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_526fd00f-5ab4-4fdb-b25d-b158f08d2e97.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_69bbbc08-87f3-48a1-a4ac-307e155d6d4f.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_6a7cc94d-dbc9-446b-85ef-d6ecbb1d3fe6.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_a8bfd3cd-03d0-41d8-85b5-f0b2e1fc1968.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_b48185fb-6191-44ce-89ea-0d7fa03f947c.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_f4635cbb-d2f5-4ff7-8308-c9e666b12f06.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Lincoln_Front_-_no_trees_Base.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-07.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-08.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-09.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-10.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-11.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-12.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-13.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-14.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-DG-15.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-LN-04.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-RN-00.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-RN-03.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-S25-415.1-CDS-Ayata-Davidson-Emalee-Davidso-Nabil-RN-12.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Plans_for_mid_final_review_Post_Review.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Screenshot_2025-02-05_122530.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Section-to_be_edited_gray.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Section_Diagrams_2.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Sections_for_mid_final_review.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Shear_Diagram.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Tube_A.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Tube_C.jpg",
+        "title": "",
+        "description": ""
       },
       {
         "filename": "conceptual_image_929d9f6a-c61f-4bca-9f0b-df6f311990cf.jpeg",
@@ -53,16 +253,6 @@
     "cover": "IMG_8681.png",
     "images": [
       {
-        "filename": "IMG_8681.png",
-        "title": "Water Entry Elevation",
-        "description": "Illustrates the entry sequence of the cistern."
-      },
-      {
-        "filename": "Geological Diagram 1.jpg",
-        "title": "Geological Diagram",
-        "description": "Geological site section showing cistern location."
-      },
-      {
         "filename": "241207_Render Photography 1.5_Post Proccess.png",
         "title": "Render Photography 1.5",
         "description": "Post-processed rendering of the cistern site."
@@ -71,6 +261,11 @@
         "filename": "241207_Render Photography 2_Post Proccess_Shadow.png",
         "title": "Render Photography 2 with Shadow",
         "description": "Second perspective render with emphasized shadows."
+      },
+      {
+        "filename": "DIAGRAMs.pdf",
+        "title": "Project Diagrams",
+        "description": "PDF compilation of conceptual and tectonic diagrams."
       },
       {
         "filename": "Enlarged Drawing-01-01.jpg",
@@ -83,6 +278,11 @@
         "description": "Plan drawings comparing layout schemes."
       },
       {
+        "filename": "Geological Diagram 1.jpg",
+        "title": "Geological Diagram",
+        "description": "Geological site section showing cistern location."
+      },
+      {
         "filename": "IMG_7627.png",
         "title": "Site Context Image 1",
         "description": "Photo documenting material conditions at site."
@@ -91,6 +291,11 @@
         "filename": "IMG_7681.JPG",
         "title": "Site Context Image 2",
         "description": "On-site photograph during early design phase."
+      },
+      {
+        "filename": "IMG_8681.png",
+        "title": "Water Entry Elevation",
+        "description": "Illustrates the entry sequence of the cistern."
       },
       {
         "filename": "MArch-SP24-4011-TC-Feghali-Davidson-Nabil-RN-03.jpg",
@@ -106,16 +311,246 @@
         "filename": "Section 3_240712_Final Links to Indesign-01-01-01-01-01.jpg",
         "title": "Section 3 Drawing",
         "description": "Compositional study of sectional moments."
+      }
+    ]
+  },
+  "Casework in Munich": {
+    "cover": "IMG_7122_Post.png",
+    "images": [
+      {
+        "filename": "IMG_7122_Post.png",
+        "title": "",
+        "description": ""
       },
       {
-        "filename": "DIAGRAMs.pdf",
-        "title": "Project Diagrams",
-        "description": "PDF compilation of conceptual and tectonic diagrams."
+        "filename": "IMG_7126_Post.png",
+        "title": "",
+        "description": ""
+      }
+    ]
+  },
+  "six_houses_two_walls": {
+    "cover": "250503_Small Lots Big Impacts_Diagram-03.jpg",
+    "images": [
+      {
+        "filename": "250503_Small Lots Big Impacts_Diagram-03.jpg",
+        "title": "",
+        "description": ""
       },
       {
-        "filename": "413_Final_Template [Recovered].pdf",
-        "title": "Final Presentation Template",
-        "description": "PDF template used for presentation layout and formatting."
+        "filename": "250503_Small Lots Big Impacts_Diagram-04.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250503_Small Lots Big Impacts_Diagram-11.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250503_Small Lots Big Impacts_Diagram-18.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250504 Small Lots - Sections-01.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "250504 Small Lots - Sections-02.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_ea98ffd4-07b6-46c7-b071-765f7b071d7a.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "IMG_5815.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "IMG_5824.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Small Lots Plans.pdf",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "image (3).jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "qr-code-71889614.png",
+        "title": "",
+        "description": ""
+      }
+    ]
+  },
+  "non-planar_printed_ceramic_studio": {
+    "cover": "Ceramic Studio Drawings-03.jpg",
+    "images": [
+      {
+        "filename": "Ceramic Studio Drawings-03.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Ceramic Studio Drawings-04.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Ceramic Studio Drawings-05.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Ceramic Studio Drawings-06.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Ceramic Studio Drawings-07.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Ceramic Studio Drawings-08.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Diagram.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_0e4745b3-d9bd-46fa-963c-8ce5c5bba107.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_45eb4ad8-d2a5-49b8-bf04-a19dff4f55ab.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Storage_EMALEE.jpg",
+        "title": "",
+        "description": ""
+      }
+    ]
+  },
+  "3247": {
+    "cover": "MArch-SP24-4011-TC-Feghali-Davidson-Nabil-RN-01.jpg",
+    "images": [
+      {
+        "filename": "MArch-SP24-4011-TC-Feghali-Davidson-Nabil-RN-01.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-SP24-4011-TC-Feghali-Davidson-Nabil-RN-02.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-SP24-4011-TC-Feghali-Davidson-Nabil-RN-03.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Plan-01_Post Proccess-01.jpg",
+        "title": "",
+        "description": ""
+      }
+    ]
+  },
+  "DU OCTA PLEX": {
+    "cover": "DSCF8996_Edited.png",
+    "images": [
+      {
+        "filename": "DSCF8996_Edited.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "DSCF9010_Edited.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "DSCF9021_Edited.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "DSCF9070_Edits.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "DSCF9087_Edited.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "GenAIImage_056bae4b-05f4-4f98-9863-415a0695ff07.jpeg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "qr-code-71889601.png",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "qr-code-71889625.png",
+        "title": "",
+        "description": ""
+      }
+    ]
+  },
+  "space_arboretum": {
+    "cover": "Arboretum Final_Roof Plan_BW-01.jpg",
+    "images": [
+      {
+        "filename": "Arboretum Final_Roof Plan_BW-01.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-W24-412-TC-Freyinger-Davidson-Nabil-MD-1.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-W24-412-TC-Freyinger-Davidson-Nabil-MD-2_extended.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "MArch-W24-412-TC-Freyinger-Davidson-Nabil-MD-4_Extended.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "Section_Post Class-01.jpg",
+        "title": "",
+        "description": ""
+      },
+      {
+        "filename": "under.jpg",
+        "title": "",
+        "description": ""
       }
     ]
   }
