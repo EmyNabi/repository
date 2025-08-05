@@ -4,12 +4,67 @@
   <meta charset="UTF-8" />
   <title>Ownership Map</title>
   <link rel="stylesheet" href="../H&dM.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p3xpwNkME1GQnUyCk0Bx0mbY8T4s9ZMP0tOoh3Dquz0=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-Vvx0s8UczvGN1gASkO5OVwOB1p5MNDoAuCEZ0aKB4kU=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.pattern/dist/leaflet.pattern.js"></script>
   <script src="/repository/header.js" defer></script>
+  <style>
+    #map {
+      height: 80vh;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
   <main>
-    <p>This feature is a work in progress. COME BACK SOON!</p>
+    <div id="map"></div>
   </main>
+  <script>
+    // Initialize base map centered on California
+    const map = L.map('map').setView([37.5, -120], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Sample parcel data with placeholder owner image
+    const parcels = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "ownerName": "Sample Owner",
+            "imageUrl": "https://placekitten.com/200/200"
+          },
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [[
+              [-121.5, 38.5],
+              [-121.5, 38.6],
+              [-121.4, 38.6],
+              [-121.4, 38.5],
+              [-121.5, 38.5]
+            ]]
+          }
+        }
+      ]
+    };
+
+    // Render parcels with image pattern fill
+    parcels.features.forEach(feature => {
+      const pattern = new L.Pattern({ width: 200, height: 200 });
+      pattern.addShape(new L.PatternImage({ url: feature.properties.imageUrl, width: 200, height: 200 }));
+      pattern.addTo(map);
+
+      L.geoJSON(feature, {
+        style: { fillPattern: pattern, color: '#000', weight: 1 },
+        onEachFeature: (f, layer) => {
+          layer.bindPopup(`<b>${f.properties.ownerName}</b>`);
+        }
+      }).addTo(map);
+    });
+  </script>
 </body>
 </html>
