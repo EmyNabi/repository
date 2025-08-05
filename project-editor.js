@@ -33,8 +33,9 @@ function render() {
     section.className = 'project-section ' + (img.layout || '') + (isCover ? ' cover' : '');
     section.draggable = isAdmin;
     section.dataset.index = index;
+    const thumbName = img.filename.replace(/\.[^./]+$/, '.webp');
     section.innerHTML = `
-      <img class="lightbox-image" src="Images/${img.filename}" alt="${img.title}">
+      <img class="lightbox-image" src="Images/thumbs/${thumbName}" data-fullres="Images/${img.filename}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fullres;" alt="${img.title}">
       <div class="project-text">
         <h3 contenteditable="${isAdmin}">${img.title}</h3>
         <p contenteditable="${isAdmin}">${img.description}</p>
@@ -143,16 +144,17 @@ function showLightbox(images, activeImage) {
   let currentIndex = images.indexOf(activeImage);
   const overlay = document.createElement('div');
   overlay.className = 'lightbox-overlay';
+  const fullSrc = activeImage.dataset.fullres || activeImage.src;
   overlay.innerHTML = `
     <span class="close">&times;</span>
     <span class="nav prev">&#10094;</span>
-    <img src="${activeImage.src}" />
+    <img src="${fullSrc}" loading="lazy" />
     <span class="nav next">&#10095;</span>
   `;
   document.body.appendChild(overlay);
   const overlayImg = overlay.querySelector('img');
   function update(idx) {
-    overlayImg.src = images[idx].src;
+    overlayImg.src = images[idx].dataset.fullres || images[idx].src;
     currentIndex = idx;
   }
   overlay.querySelector('.prev').onclick = () => update((currentIndex - 1 + images.length) % images.length);
