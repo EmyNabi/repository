@@ -1,6 +1,7 @@
 <?php
 $src = $_GET['src'] ?? '';
-$w = intval($_GET['w'] ?? 0);
+$w   = intval($_GET['w'] ?? 0);
+$fmt = $_GET['fmt'] ?? '';
 if (!$src || $w <= 0) {
     http_response_code(400);
     exit('bad request');
@@ -22,7 +23,7 @@ if (!$info) {
 }
 list($origW, $origH) = $info;
 $mime = $info['mime'];
-$h = (int)($origH * ($w / $origW));
+$h    = (int)($origH * ($w / $origW));
 switch ($mime) {
     case 'image/jpeg':
     case 'image/jpg':
@@ -39,21 +40,28 @@ switch ($mime) {
         exit('unsupported');
 }
 $dst = imagecreatetruecolor($w, $h);
-if ($mime === 'image/png') {
+if ($mime === 'image/png' || $fmt === 'webp') {
     imagealphablending($dst, false);
     imagesavealpha($dst, true);
 }
 imagecopyresampled($dst, $srcImg, 0, 0, 0, 0, $w, $h, $origW, $origH);
-header('Content-Type: ' . $mime);
-switch ($mime) {
-    case 'image/png':
-        imagepng($dst);
-        break;
-    case 'image/gif':
-        imagegif($dst);
-        break;
-    default:
-        imagejpeg($dst, null, 85);
+
+if ($fmt === 'webp') {
+    header('Content-Type: image/webp');
+    imagewebp($dst, null, 85);
+} else {
+    header('Content-Type: ' . $mime);
+    switch ($mime) {
+        case 'image/png':
+            imagepng($dst);
+            break;
+        case 'image/gif':
+            imagegif($dst);
+            break;
+        default:
+            imagejpeg($dst, null, 85);
+    }
 }
+
 imagedestroy($srcImg);
 imagedestroy($dst);
