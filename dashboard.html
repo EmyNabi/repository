@@ -94,7 +94,7 @@
           div.className = 'editable-section';
           div.setAttribute('draggable', true);
           div.innerHTML = `
-            <img src="${reader.result}" loading="lazy" />
+            <img src="${reader.result}" data-fullres="${reader.result}" loading="lazy" />
             <div>
               <input type="text" placeholder="Image Title" />
               <textarea placeholder="Description"></textarea>

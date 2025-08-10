@@ -31,6 +31,14 @@ if (!document.getElementById('responsive-images-script')) {
   document.head.appendChild(script);
 }
 
+if (!document.getElementById('lightbox-script')) {
+  const script = document.createElement('script');
+  script.src = '/repository/lightbox.js';
+  script.defer = true;
+  script.id = 'lightbox-script';
+  document.head.appendChild(script);
+}
+
 function initImageFadeIn(root = document) {
   const imgs = root.querySelectorAll('img');
   imgs.forEach(img => {
