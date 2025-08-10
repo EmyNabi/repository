@@ -292,6 +292,10 @@ body.editing .project-card {
   color: black;
 }
 
+img[data-fullres] {
+  cursor: pointer;
+}
+
 
 .lightbox-overlay {
   position: fixed;
