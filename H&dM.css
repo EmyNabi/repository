@@ -88,8 +88,8 @@ body.editing .project-card {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* increased card min-width */
-  gap: 50px; /* more space between cards */
-  padding: 60px; /* more padding around grid */
+  gap: 20px; /* reduced space between cards */
+  padding: 20px; /* reduced padding around grid */
   justify-items: center;
 }
 
@@ -138,15 +138,6 @@ body.editing .project-card {
   background: #f0f0f0;
   color: #666;
   z-index: 1;
-}
-
-.project-card .project-title {
-  position: relative;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 12px;
-  font-size: 1.1rem; /* slightly larger text */
-  text-align: center;
 }
 
 
@@ -370,10 +361,6 @@ img[data-fullres] {
   .project-card {
     max-width: none;
     width: 100%;
-  }
-
-  .project-card .project-title {
-    display: none;
   }
 
   .project-section {
