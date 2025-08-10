@@ -33,9 +33,10 @@ function render() {
     section.className = 'project-section ' + (img.layout || '') + (isCover ? ' cover' : '');
     section.draggable = isAdmin;
     section.dataset.index = index;
-    const thumbName = img.filename.replace(/\.[^./]+$/, '.webp');
+    const baseName = img.filename.replace(/\.[^./]+$/, '');
+    const mediumName = `${baseName}-medium.webp`;
     section.innerHTML = `
-      <img class="lightbox-image" src="Images/thumbs/${thumbName}" data-fullres="Images/${img.filename}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fullres;" alt="${img.title}">
+      <img class="lightbox-image" src="Images/${mediumName}" data-fullres="Images/${img.filename}" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fullres;" alt="${img.title}">
       <div class="project-text">
         <h3 contenteditable="${isAdmin}">${img.title}</h3>
         <p contenteditable="${isAdmin}">${img.description}</p>
