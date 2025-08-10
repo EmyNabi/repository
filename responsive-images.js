@@ -56,6 +56,10 @@ function applyResponsiveImages(root = document) {
 }
 
 function initResponsiveImages() {
+  // Skip responsive image handling on static hosts like GitHub Pages
+  if (location.hostname.endsWith('github.io')) {
+    return;
+  }
   applyResponsiveImages();
 }
 
