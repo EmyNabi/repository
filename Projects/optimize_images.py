@@ -37,7 +37,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Optimize images to WebP (thumb + medium).")
-    parser.add_argument("--images", default="images", help="Path to images folder (default: ./images)")
+    parser.add_argument("--images", type=str, required=True, help="Path to images folder")
     args = parser.parse_args()
 
     if os.path.exists(args.images):
