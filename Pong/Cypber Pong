@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CYBERR PONG</title>
+<style>
+  :root{
+    --bg0:#05060d;
+    --bg1:#0a0f1f;
+    --neon1:#00fff2; /* cyan */
+    --neon2:#ff00ea; /* magenta */
+    --neon3:#9dff00; /* acid */
+    --ink:#e6fff7;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(1200px 800px at 20% 20%, #0e1430 0%, var(--bg1) 40%, var(--bg0) 100%),
+                linear-gradient(135deg, rgba(0,255,242,.08), transparent 50%),
+                linear-gradient(225deg, rgba(255,0,234,.08), transparent 50%);
+    color:var(--ink);
+    font: 500 16px/1.4 "Consolas", "SFMono-Regular", Menlo, Monaco, "Liberation Mono", "Courier New", monospace;
+    overflow:hidden;
+  }
+
+  .shell{ width:min(92vw, 1200px); aspect-ratio:16/9; position:relative; }
+
+  .frame{ position:absolute; inset:0; border:2px solid var(--neon1);
+    border-radius:18px;
+    box-shadow: 0 0 18px 2px var(--neon1), 0 0 38px 6px rgba(0,255,242,.35), inset 0 0 18px rgba(0,255,242,.25);
+    overflow:hidden;
+    animation: hue 12s linear infinite;
+  }
+  @keyframes hue{ 0%{filter:hue-rotate(0deg)} 100%{filter:hue-rotate(360deg)} }
+
+  canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+
+  /* HUD */
+  .hud{ position:absolute; inset:0; pointer-events:none; }
+  .topbar{ position:absolute; left:18px; right:18px; top:12px; display:flex; align-items:center; justify-content:space-between; text-transform:uppercase; letter-spacing:.12em; }
+  .brand{ opacity:.9; font-weight:700; text-shadow:0 0 8px var(--neon2), 0 0 16px rgba(255,0,234,.6); }
+  .score{ display:flex; gap:22px; align-items:center; font-size: clamp(18px, 4vw, 34px); }
+  .score span{ padding:.1em .45em; border:1px solid var(--neon2); border-radius:10px; box-shadow: inset 0 0 10px rgba(255,0,234,.45), 0 0 16px rgba(255,0,234,.35); text-shadow: 0 0 6px var(--neon2); }
+
+  .controls{ position:absolute; bottom:12px; left:12px; right:12px; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; pointer-events:auto; }
+  .btns{ display:flex; gap:8px; flex-wrap:wrap; }
+  button{ all:unset; cursor:pointer; padding:.55em .85em; border:1px solid var(--neon1); border-radius:12px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; font-size:12px; color:var(--ink);
+    box-shadow: 0 0 10px rgba(0,255,242,.45), inset 0 0 12px rgba(0,255,242,.2);
+    transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+  }
+  button:hover{ transform:translateY(-1px); box-shadow: 0 0 16px rgba(0,255,242,.6), inset 0 0 16px rgba(0,255,242,.3); }
+  button.alt{ border-color:var(--neon2); box-shadow: 0 0 10px rgba(255,0,234,.35), inset 0 0 12px rgba(255,0,234,.18); }
+  .legend{ opacity:.8; font-size:12px; letter-spacing:.08em; }
+
+  /* Overlays */
+  .overlay{ position:absolute; inset:0; display:grid; place-items:center; background: radial-gradient(600px 400px at 50% 50%, rgba(0,255,242,.07), rgba(0,0,0,.5) 60%, rgba(0,0,0,.7) 100%); backdrop-filter: blur(1.5px); }
+  .panel{ text-align:center; max-width:min(85%, 720px); padding:20px 24px; border:1px dashed var(--neon2); border-radius:16px; box-shadow:0 0 24px rgba(255,0,234,.35), inset 0 0 12px rgba(255,0,234,.18); }
+  .title{ font-size: clamp(22px, 6.2vw, 52px); margin:0 0 10px; text-transform:uppercase; letter-spacing:.2em; font-weight:900; text-shadow:0 0 10px var(--neon1), 0 0 22px rgba(0,255,242,.5), 0 0 26px rgba(255,0,234,.35); }
+  .subtitle{ opacity:.9; margin:0 0 12px; letter-spacing:.12em; }
+  .kbd{ display:inline-block; border:1px solid var(--neon1); padding:.15em .45em; border-radius:8px; margin:0 .25em; box-shadow: inset 0 0 8px rgba(0,255,242,.35); }
+
+  /* CRT Scanlines & noise */
+  .scanlines{ position:absolute; inset:0; pointer-events:none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.12) 0px, rgba(0,0,0,.12) 2px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 4px); mix-blend-mode: multiply; opacity:.35; animation: flicker 3.5s infinite; }
+  @keyframes flicker { 0%,100%{opacity:.33} 50%{opacity:.42} }
+  .noise{ position:absolute; inset:0; pointer-events:none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.08"/></svg>'); opacity:.12; mix-blend-mode:soft-light; }
+
+  /* Center divider glow (drawn with CSS for extra pop) */
+  .divider{ position:absolute; top:0; bottom:0; left:50%; width:2px; transform:translateX(-1px); background: linear-gradient(to bottom, transparent, rgba(0,255,242,.85), transparent); filter: drop-shadow(0 0 8px rgba(0,255,242,.9)) drop-shadow(0 0 14px rgba(0,255,242,.6)); opacity:.6; }
+</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="frame">
+      <canvas id="game"></canvas>
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="hud">
+        <div class="topbar">
+          <div class="brand">PONG_2077 ∷ Night City League</div>
+          <div class="score"><span id="lScore">0</span><span id="rScore">0</span></div>
+        </div>
+        <div class="controls">
+          <div class="btns">
+            <button id="playBtn">▶ Start</button>
+            <button id="pauseBtn" class="alt">❚❚ Pause</button>
+            <button id="resetBtn">⟲ Reset</button>
+            <button id="modeBtn" class="alt">1P vs AI</button>
+            <button id="scanBtn">CRT: ON</button>
+          </div>
+          <div class="legend">W/S &nbsp;← Left · ↑/↓ → Right · Space = Pause · 1 = Toggle 1P/2P</div>
+        </div>
+      </div>
+
+      <div class="overlay" id="startOverlay">
+        <div class="panel">
+          <h1 class="title">CYBERPUNK PONG_2077</h1>
+          <p class="subtitle">Neon reflex duel in a synth‑soaked arena.</p>
+          <p>Controls: <span class="kbd">W</span>/<span class="kbd">S</span> (Left) · <span class="kbd">↑</span>/<span class="kbd">↓</span> (Right) · <span class="kbd">Space</span> to pause. <br/>Tap or click to start. Press <span class="kbd">1</span> to switch 1P/2P.</p>
+          <button id="startBtn" style="margin-top:10px">▶ Enter the Grid</button>
+        </div>
+      </div>
+
+      <div class="scanlines" id="scan"></div>
+      <div class="noise"></div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const lScoreEl = document.getElementById('lScore');
+  const rScoreEl = document.getElementById('rScore');
+
+  const startOverlay = document.getElementById('startOverlay');
+  const startBtn = document.getElementById('startBtn');
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const modeBtn = document.getElementById('modeBtn');
+  const scanBtn = document.getElementById('scanBtn');
+  const scan = document.getElementById('scan');
+
+  let W = 960, H = 540; // logical drawing size (matches CSS via DPR transform)
+  let running = false;
+  let singlePlayer = true; // right paddle AI
+  let last = 0;
+
+  const PADDLE_W = 14, PADDLE_H0 = 110; // base height; will scale with H
+  const BALL_R0 = 8;
+
+  const state = {
+    l: { x: 30, y: 0, w: PADDLE_W, h: PADDLE_H0, vy: 0 },
+    r: { x: 0, y: 0, w: PADDLE_W, h: PADDLE_H0, vy: 0 },
+    ball: { x: 0, y: 0, vx: 0, vy: 0, r: BALL_R0, speed: 360 },
+    scoreL: 0, scoreR: 0,
+    maxScore: 11
+  };
+
+  const keys = new Set();
+
+  function resize() {
+    // Keep 16:9 area inside frame element
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    W = rect.width; H = rect.height;
+
+    // scale paddles/ball size based on height
+    state.l.h = state.r.h = Math.max(80, H * 0.2);
+    state.ball.r = Math.max(6, H * 0.015);
+    state.l.x = 30; state.r.x = W - 30 - state.r.w;
+  }
+
+  function resetBall(direction = Math.random() < 0.5 ? 1 : -1) {
+    state.ball.x = W/2; state.ball.y = H/2;
+    const angle = (Math.random() * 0.6 - 0.3); // -0.3..0.3 rad
+    const speed = Math.max(250, Math.min(700, 320 + Math.random()*60));
+    state.ball.vx = Math.cos(angle) * speed * direction;
+    state.ball.vy = Math.sin(angle) * speed;
+    state.ball.speed = speed;
+  }
+
+  function resetAll() {
+    state.scoreL = 0; state.scoreR = 0;
+    lScoreEl.textContent = '0'; rScoreEl.textContent = '0';
+    centerPaddles();
+    resetBall();
+  }
+
+  function centerPaddles(){
+    state.l.y = H/2 - state.l.h/2;
+    state.r.y = H/2 - state.r.h/2;
+  }
+
+  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+  function update(dt){
+    const padSpeed = Math.max(380, H*0.75); // px/s
+
+    // Controls (Left paddle)
+    if(keys.has('KeyW')) state.l.y -= padSpeed*dt;
+    if(keys.has('KeyS')) state.l.y += padSpeed*dt;
+
+    // Controls (Right paddle if 2P)
+    if(!singlePlayer){
+      if(keys.has('ArrowUp')) state.r.y -= padSpeed*dt;
+      if(keys.has('ArrowDown')) state.r.y += padSpeed*dt;
+    } else {
+      // Simple AI: track ball only when ball moving toward it
+      const aiMax = padSpeed * 0.9;
+      const target = (state.ball.vx > 0) ? (state.ball.y - state.r.h/2) : (H/2 - state.r.h/2);
+      const dir = Math.sign(target - state.r.y);
+      state.r.y += dir * aiMax * dt;
+      // small jitter for style
+      state.r.y += Math.sin(performance.now()/140) * 10 * dt;
+    }
+
+    state.l.y = clamp(state.l.y, 0, H - state.l.h);
+    state.r.y = clamp(state.r.y, 0, H - state.r.h);
+
+    // Ball movement
+    state.ball.x += state.ball.vx * dt;
+    state.ball.y += state.ball.vy * dt;
+
+    // Walls
+    if(state.ball.y - state.ball.r < 0){ state.ball.y = state.ball.r; state.ball.vy *= -1; }
+    if(state.ball.y + state.ball.r > H){ state.ball.y = H - state.ball.r; state.ball.vy *= -1; }
+
+    // Paddles collision
+    collidePaddle(state.l, 1);
+    collidePaddle(state.r, -1);
+
+    // Score
+    if(state.ball.x + state.ball.r < 0){
+      // Right scores
+      state.scoreR++; rScoreEl.textContent = String(state.scoreR);
+      centerPaddles();
+      if(checkWin()) return;
+      resetBall(1);
+    }
+    if(state.ball.x - state.ball.r > W){
+      // Left scores
+      state.scoreL++; lScoreEl.textContent = String(state.scoreL);
+      centerPaddles();
+      if(checkWin()) return;
+      resetBall(-1);
+    }
+  }
+
+  function checkWin(){
+    if(state.scoreL >= state.maxScore || state.scoreR >= state.maxScore){
+      running = false;
+      showOverlay(`${state.scoreL>=state.maxScore? 'LEFT' : 'RIGHT'} WINS`, 'Press Reset to play again');
+      return true;
+    }
+    return false;
+  }
+
+  function collidePaddle(p, dir){
+    // dir: +1 for left paddle (ball should go right after), -1 for right
+    const bx = state.ball.x, by = state.ball.y, br = state.ball.r;
+    if(bx - br < p.x + p.w && bx + br > p.x && by + br > p.y && by - br < p.y + p.h){
+      // Put ball outside paddle
+      if(dir === 1) state.ball.x = p.x + p.w + br + 0.5; else state.ball.x = p.x - br - 0.5;
+      // Compute bounce angle depending on impact point
+      const rel = (by - (p.y + p.h/2)) / (p.h/2); // -1..1
+      const maxA = 1.2; // ~69°
+      const ang = rel * maxA;
+      const speed = Math.min(900, Math.hypot(state.ball.vx, state.ball.vy) * 1.04 + 6);
+      state.ball.vx = Math.cos(ang) * speed * dir;
+      state.ball.vy = Math.sin(ang) * speed;
+    }
+  }
+
+  function neonStroke(x1,y1,x2,y2,w,color){
+    ctx.save();
+    ctx.strokeStyle=color; ctx.lineWidth=w; ctx.globalAlpha=0.95; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    ctx.shadowColor=color; ctx.shadowBlur=18; ctx.stroke();
+    ctx.restore();
+  }
+
+  function draw(){
+    // Slight motion trail for cyber feel
+    ctx.fillStyle = 'rgba(5,6,13,0.35)';
+    ctx.fillRect(0,0,W,H);
+
+    // Court edges
+    neonStroke(8, 8, W-8, 8, 2, getComputedStyle(document.documentElement).getPropertyValue('--neon1'));
+    neonStroke(8, H-8, W-8, H-8, 2, getComputedStyle(document.documentElement).getPropertyValue('--neon1'));
+
+    // Paddles
+    drawNeonRect(state.l.x, state.l.y, state.l.w, state.l.h, '#ff00ea');
+    drawNeonRect(state.r.x, state.r.y, state.r.w, state.r.h, '#00fff2');
+
+    // Ball
+    drawNeonBall(state.ball.x, state.ball.y, state.ball.r, '#9dff00');
+  }
+
+  function drawNeonRect(x,y,w,h,color){
+    ctx.save();
+    ctx.fillStyle = color; ctx.shadowColor=color; ctx.shadowBlur=18; ctx.globalAlpha=0.95;
+    ctx.fillRect(x,y,w,h);
+    ctx.restore();
+  }
+
+  function drawNeonBall(x,y,r,color){
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fillStyle=color; ctx.shadowColor=color; ctx.shadowBlur=20; ctx.globalAlpha=0.95; ctx.fill();
+    ctx.restore();
+  }
+
+  function loop(t){
+    const dt = Math.min(0.033, (t - last) / 1000 || 0); // cap dt
+    last = t;
+    if(running){ update(dt); }
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  function start(){
+    startOverlay.style.display = 'none'; running = true; last = performance.now();
+  }
+
+  function pause(){ running = false; }
+  function showOverlay(title, hint){
+    startOverlay.style.display = 'grid';
+    startOverlay.querySelector('.title').textContent = title;
+    startOverlay.querySelector('.subtitle').textContent = hint || 'Tap or press ▶ to begin';
+  }
+
+  // Events
+  window.addEventListener('resize', resize);
+  resize();
+  resetAll();
+  draw();
+  requestAnimationFrame(loop);
+
+  // Keyboard
+  window.addEventListener('keydown', (e)=>{
+    if(['KeyW','KeyS','ArrowUp','ArrowDown'].includes(e.code)) keys.add(e.code);
+    if(e.code === 'Space'){ running ? pause() : start(); }
+    if(e.code === 'Digit1'){ toggleMode(); }
+  });
+  window.addEventListener('keyup', (e)=>{
+    keys.delete(e.code);
+  });
+
+  // Pointer/touch: drag to move paddles. If 1P, left controls player; if 2P, left half controls left, right half controls right.
+  canvas.addEventListener('pointerdown', ()=>{ if(!running) start(); });
+  canvas.addEventListener('pointermove', (e)=>{
+    const rect = canvas.getBoundingClientRect();
+    const y = e.clientY - rect.top;
+    const x = e.clientX - rect.left;
+    if(!singlePlayer){
+      if(x < W/2) state.l.y = clamp(y - state.l.h/2, 0, H - state.l.h);
+      else state.r.y = clamp(y - state.r.h/2, 0, H - state.r.h);
+    } else {
+      // always map to left paddle in 1P
+      state.l.y = clamp(y - state.l.h/2, 0, H - state.l.h);
+    }
+  });
+
+  // Buttons
+  startBtn.addEventListener('click', start);
+  playBtn.addEventListener('click', start);
+  pauseBtn.addEventListener('click', ()=>{ running ? pause() : start(); });
+  resetBtn.addEventListener('click', ()=>{ resetAll(); showOverlay('CYBERPUNK PONG_2077', 'Tap or press ▶ to begin'); });
+  modeBtn.addEventListener('click', toggleMode);
+  scanBtn.addEventListener('click', ()=>{
+    const on = scan.style.display !== 'none';
+    scan.style.display = on ? 'none' : 'block';
+    scanBtn.textContent = `CRT: ${on? 'OFF':'ON'}`;
+  });
+
+  function toggleMode(){
+    singlePlayer = !singlePlayer;
+    modeBtn.textContent = singlePlayer ? '1P vs AI' : '2P Local';
+  }
+})();
+</script>
+</body>
+</html>
