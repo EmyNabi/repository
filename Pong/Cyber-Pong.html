@@ -2,16 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CYBERR PONG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>CYBERR PONG — Mobile + Tilt + Mouse</title>
 <style>
   :root{
-    --bg0:#05060d;
-    --bg1:#0a0f1f;
-    --neon1:#00fff2; /* cyan */
-    --neon2:#ff00ea; /* magenta */
-    --neon3:#9dff00; /* acid */
-    --ink:#e6fff7;
+    --bg0:#05060d; --bg1:#0a0f1f;
+    --neon1:#00fff2; --neon2:#ff00ea; --neon3:#9dff00; --ink:#e6fff7;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -21,53 +17,99 @@
                 linear-gradient(135deg, rgba(0,255,242,.08), transparent 50%),
                 linear-gradient(225deg, rgba(255,0,234,.08), transparent 50%);
     color:var(--ink);
-    font: 500 16px/1.4 "Consolas", "SFMono-Regular", Menlo, Monaco, "Liberation Mono", "Courier New", monospace;
+    font: 600 15px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
     overflow:hidden;
   }
 
-  .shell{ width:min(92vw, 1200px); aspect-ratio:16/9; position:relative; }
-
+  .shell{ width:min(96vw, 1200px); aspect-ratio:16/9; position:relative; }
   .frame{ position:absolute; inset:0; border:2px solid var(--neon1);
-    border-radius:18px;
+    border-radius:18px; overflow:hidden; animation: hue 12s linear infinite;
     box-shadow: 0 0 18px 2px var(--neon1), 0 0 38px 6px rgba(0,255,242,.35), inset 0 0 18px rgba(0,255,242,.25);
-    overflow:hidden;
-    animation: hue 12s linear infinite;
   }
-  @keyframes hue{ 0%{filter:hue-rotate(0deg)} 100%{filter:hue-rotate(360deg)} }
+  @keyframes hue{ 0%{filter:hue-rotate(0)} 100%{filter:hue-rotate(360deg)} }
 
-  canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:none; }
 
   /* HUD */
   .hud{ position:absolute; inset:0; pointer-events:none; }
-  .topbar{ position:absolute; left:18px; right:18px; top:12px; display:flex; align-items:center; justify-content:space-between; text-transform:uppercase; letter-spacing:.12em; }
-  .brand{ opacity:.9; font-weight:700; text-shadow:0 0 8px var(--neon2), 0 0 16px rgba(255,0,234,.6); }
-  .score{ display:flex; gap:22px; align-items:center; font-size: clamp(18px, 4vw, 34px); }
-  .score span{ padding:.1em .45em; border:1px solid var(--neon2); border-radius:10px; box-shadow: inset 0 0 10px rgba(255,0,234,.45), 0 0 16px rgba(255,0,234,.35); text-shadow: 0 0 6px var(--neon2); }
+  .topbar{
+    position:absolute; left:14px; right:14px; top:10px;
+    display:flex; align-items:center; justify-content:space-between;
+    text-transform:uppercase; letter-spacing:.12em; gap:10px;
+  }
+  .brand{ opacity:.9; font-weight:800; font-size:clamp(11px,2.4vw,14px);
+    text-shadow:0 0 8px var(--neon2), 0 0 16px rgba(255,0,234,.6);
+  }
+  .score{ display:flex; gap:16px; align-items:center; font-size: clamp(16px, 4.5vw, 34px); }
+  .score span{
+    padding:.12em .5em; border:1px solid var(--neon2); border-radius:10px;
+    box-shadow: inset 0 0 10px rgba(255,0,234,.45), 0 0 16px rgba(255,0,234,.35);
+    text-shadow: 0 0 6px var(--neon2);
+  }
 
-  .controls{ position:absolute; bottom:12px; left:12px; right:12px; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; pointer-events:auto; }
+  .controls{
+    position:absolute; bottom:10px; left:10px; right:10px;
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; pointer-events:auto;
+  }
   .btns{ display:flex; gap:8px; flex-wrap:wrap; }
-  button{ all:unset; cursor:pointer; padding:.55em .85em; border:1px solid var(--neon1); border-radius:12px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; font-size:12px; color:var(--ink);
+  button{
+    all:unset; cursor:pointer; padding:.65em 1em;
+    border:1px solid var(--neon1); border-radius:12px;
+    text-transform:uppercase; letter-spacing:.12em; font-weight:800; font-size:12px; color:var(--ink);
     box-shadow: 0 0 10px rgba(0,255,242,.45), inset 0 0 12px rgba(0,255,242,.2);
     transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
   }
   button:hover{ transform:translateY(-1px); box-shadow: 0 0 16px rgba(0,255,242,.6), inset 0 0 16px rgba(0,255,242,.3); }
   button.alt{ border-color:var(--neon2); box-shadow: 0 0 10px rgba(255,0,234,.35), inset 0 0 12px rgba(255,0,234,.18); }
-  .legend{ opacity:.8; font-size:12px; letter-spacing:.08em; }
+  .legend{ opacity:.8; font-size:12px; letter-spacing:.08em; display:block }
 
   /* Overlays */
-  .overlay{ position:absolute; inset:0; display:grid; place-items:center; background: radial-gradient(600px 400px at 50% 50%, rgba(0,255,242,.07), rgba(0,0,0,.5) 60%, rgba(0,0,0,.7) 100%); backdrop-filter: blur(1.5px); }
-  .panel{ text-align:center; max-width:min(85%, 720px); padding:20px 24px; border:1px dashed var(--neon2); border-radius:16px; box-shadow:0 0 24px rgba(255,0,234,.35), inset 0 0 12px rgba(255,0,234,.18); }
-  .title{ font-size: clamp(22px, 6.2vw, 52px); margin:0 0 10px; text-transform:uppercase; letter-spacing:.2em; font-weight:900; text-shadow:0 0 10px var(--neon1), 0 0 22px rgba(0,255,242,.5), 0 0 26px rgba(255,0,234,.35); }
+  .overlay{ position:absolute; inset:0; display:grid; place-items:center;
+    background: radial-gradient(600px 400px at 50% 50%, rgba(0,255,242,.07), rgba(0,0,0,.5) 60%, rgba(0,0,0,.7) 100%);
+    backdrop-filter: blur(1.5px);
+  }
+  .panel{ text-align:center; max-width:min(88%, 740px); padding:20px 24px;
+    border:1px dashed var(--neon2); border-radius:16px;
+    box-shadow:0 0 24px rgba(255,0,234,.35), inset 0 0 12px rgba(255,0,234,.18);
+  }
+  .title{ font-size: clamp(22px, 6.2vw, 52px); margin:0 0 10px; text-transform:uppercase; letter-spacing:.2em; font-weight:900;
+    text-shadow:0 0 10px var(--neon1), 0 0 22px rgba(0,255,242,.5), 0 0 26px rgba(255,0,234,.35);
+  }
   .subtitle{ opacity:.9; margin:0 0 12px; letter-spacing:.12em; }
-  .kbd{ display:inline-block; border:1px solid var(--neon1); padding:.15em .45em; border-radius:8px; margin:0 .25em; box-shadow: inset 0 0 8px rgba(0,255,242,.35); }
+  .kbd{ display:inline-block; border:1px solid var(--neon1); padding:.15em .45em; border-radius:8px; margin:0 .25em;
+    box-shadow: inset 0 0 8px rgba(0,255,242,.35);
+  }
 
   /* CRT Scanlines & noise */
-  .scanlines{ position:absolute; inset:0; pointer-events:none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.12) 0px, rgba(0,0,0,.12) 2px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 4px); mix-blend-mode: multiply; opacity:.35; animation: flicker 3.5s infinite; }
+  .scanlines{ position:absolute; inset:0; pointer-events:none; background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.12) 0px, rgba(0,0,0,.12) 2px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 4px);
+    mix-blend-mode: multiply; opacity:.35; animation: flicker 3.5s infinite;
+  }
   @keyframes flicker { 0%,100%{opacity:.33} 50%{opacity:.42} }
-  .noise{ position:absolute; inset:0; pointer-events:none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.08"/></svg>'); opacity:.12; mix-blend-mode:soft-light; }
+  .noise{ position:absolute; inset:0; pointer-events:none; background-image:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.08"/></svg>');
+    opacity:.12; mix-blend-mode:soft-light;
+  }
 
-  /* Center divider glow (drawn with CSS for extra pop) */
-  .divider{ position:absolute; top:0; bottom:0; left:50%; width:2px; transform:translateX(-1px); background: linear-gradient(to bottom, transparent, rgba(0,255,242,.85), transparent); filter: drop-shadow(0 0 8px rgba(0,255,242,.9)) drop-shadow(0 0 14px rgba(0,255,242,.6)); opacity:.6; }
+  /* Center divider */
+  .divider{ position:absolute; top:0; bottom:0; left:50%; width:2px; transform:translateX(-1px);
+    background: linear-gradient(to bottom, transparent, rgba(0,255,242,.85), transparent);
+    filter: drop-shadow(0 0 8px rgba(0,255,242,.9)) drop-shadow(0 0 14px rgba(0,255,242,.6)); opacity:.6;
+  }
+
+  /* Touch pads for mobile (hidden on wide screens) */
+  .touchpad{
+    position:absolute; top:0; bottom:0; width:50%; opacity:0; /* invisible, but captures input */
+    touch-action:none; pointer-events:auto;
+  }
+  .touchpad.l{ left:0; }
+  .touchpad.r{ right:0; }
+
+  @media (max-width: 780px){
+    .controls .legend{ display:none; }
+    button{ font-size:13px; padding:.75em 1.05em; }
+    .btns{ gap:10px }
+  }
 </style>
 </head>
 <body>
@@ -76,9 +118,13 @@
       <canvas id="game"></canvas>
       <div class="divider" aria-hidden="true"></div>
 
+      <!-- invisible touch zones for mobile -->
+      <div class="touchpad l" id="padL" aria-hidden="true"></div>
+      <div class="touchpad r" id="padR" aria-hidden="true"></div>
+
       <div class="hud">
         <div class="topbar">
-          <div class="brand">PONG_2077 ∷ Night City League</div>
+          <div class="brand">PONG_2077 ∷ Night City League</div>
           <div class="score"><span id="lScore">0</span><span id="rScore">0</span></div>
         </div>
         <div class="controls">
@@ -87,17 +133,21 @@
             <button id="pauseBtn" class="alt">❚❚ Pause</button>
             <button id="resetBtn">⟲ Reset</button>
             <button id="modeBtn" class="alt">1P vs AI</button>
+            <button id="tiltBtn">Tilt: OFF</button>
             <button id="scanBtn">CRT: ON</button>
           </div>
-          <div class="legend">W/S &nbsp;← Left · ↑/↓ → Right · Space = Pause · 1 = Toggle 1P/2P</div>
+          <div class="legend">Mouse move / Drag / Tilt phone / Keys (W/S & ↑/↓). Space = Pause · 1 = Toggle 1P/2P</div>
         </div>
       </div>
 
       <div class="overlay" id="startOverlay">
         <div class="panel">
           <h1 class="title">CYBERPUNK PONG_2077</h1>
-          <p class="subtitle">Neon reflex duel in a synth‑soaked arena.</p>
-          <p>Controls: <span class="kbd">W</span>/<span class="kbd">S</span> (Left) · <span class="kbd">↑</span>/<span class="kbd">↓</span> (Right) · <span class="kbd">Space</span> to pause. <br/>Tap or click to start. Press <span class="kbd">1</span> to switch 1P/2P.</p>
+          <p class="subtitle" id="startHint">Neon reflex duel in a synth-soaked arena.</p>
+          <p id="controlLine">
+            Controls: Mouse move, drag, or tilt. Keys: <span class="kbd">W</span>/<span class="kbd">S</span> (Left),
+            <span class="kbd">↑</span>/<span class="kbd">↓</span> (Right), <span class="kbd">Space</span> pause.
+          </p>
           <button id="startBtn" style="margin-top:10px">▶ Enter the Grid</button>
         </div>
       </div>
@@ -110,7 +160,7 @@
 <script>
 (() => {
   const canvas = document.getElementById('game');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: true });
   const lScoreEl = document.getElementById('lScore');
   const rScoreEl = document.getElementById('rScore');
 
@@ -120,20 +170,31 @@
   const pauseBtn = document.getElementById('pauseBtn');
   const resetBtn = document.getElementById('resetBtn');
   const modeBtn = document.getElementById('modeBtn');
+  const tiltBtn = document.getElementById('tiltBtn');
   const scanBtn = document.getElementById('scanBtn');
   const scan = document.getElementById('scan');
+  const padL = document.getElementById('padL');
+  const padR = document.getElementById('padR');
 
-  let W = 960, H = 540; // logical drawing size (matches CSS via DPR transform)
+  // Mobile copy tweak
+  if (matchMedia('(pointer:coarse)').matches) {
+    document.getElementById('controlLine').textContent =
+      'Tap & drag either half to move paddles. Or enable Tilt. Pause with the Pause button.';
+  }
+
+  let W = 960, H = 540;
   let running = false;
   let singlePlayer = true; // right paddle AI
   let last = 0;
+  let tiltActive = false;
+  let tiltHandler = null;
 
-  const PADDLE_W = 14, PADDLE_H0 = 110; // base height; will scale with H
+  const PADDLE_W = 14, PADDLE_H0 = 110;
   const BALL_R0 = 8;
 
   const state = {
-    l: { x: 30, y: 0, w: PADDLE_W, h: PADDLE_H0, vy: 0 },
-    r: { x: 0, y: 0, w: PADDLE_W, h: PADDLE_H0, vy: 0 },
+    l: { x: 30, y: 0, w: PADDLE_W, h: PADDLE_H0 },
+    r: { x: 0,  y: 0, w: PADDLE_W, h: PADDLE_H0 },
     ball: { x: 0, y: 0, vx: 0, vy: 0, r: BALL_R0, speed: 360 },
     scoreL: 0, scoreR: 0,
     maxScore: 11
@@ -142,7 +203,6 @@
   const keys = new Set();
 
   function resize() {
-    // Keep 16:9 area inside frame element
     const rect = canvas.getBoundingClientRect();
     const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
     canvas.width = Math.round(rect.width * dpr);
@@ -150,15 +210,19 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     W = rect.width; H = rect.height;
 
-    // scale paddles/ball size based on height
+    // size scales with height for consistent feel
     state.l.h = state.r.h = Math.max(80, H * 0.2);
     state.ball.r = Math.max(6, H * 0.015);
     state.l.x = 30; state.r.x = W - 30 - state.r.w;
+
+    // keep paddles inside
+    state.l.y = clamp(state.l.y, 0, H - state.l.h);
+    state.r.y = clamp(state.r.y, 0, H - state.r.h);
   }
 
   function resetBall(direction = Math.random() < 0.5 ? 1 : -1) {
     state.ball.x = W/2; state.ball.y = H/2;
-    const angle = (Math.random() * 0.6 - 0.3); // -0.3..0.3 rad
+    const angle = (Math.random() * 0.6 - 0.3);
     const speed = Math.max(250, Math.min(700, 320 + Math.random()*60));
     state.ball.vx = Math.cos(angle) * speed * direction;
     state.ball.vy = Math.sin(angle) * speed;
@@ -178,32 +242,30 @@
   }
 
   function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+  const lerp = (a,b,t)=> a + (b-a)*t;
 
   function update(dt){
     const padSpeed = Math.max(380, H*0.75); // px/s
 
-    // Controls (Left paddle)
+    // Keyboard
     if(keys.has('KeyW')) state.l.y -= padSpeed*dt;
     if(keys.has('KeyS')) state.l.y += padSpeed*dt;
 
-    // Controls (Right paddle if 2P)
     if(!singlePlayer){
       if(keys.has('ArrowUp')) state.r.y -= padSpeed*dt;
       if(keys.has('ArrowDown')) state.r.y += padSpeed*dt;
     } else {
-      // Simple AI: track ball only when ball moving toward it
-      const aiMax = padSpeed * 0.9;
+      // AI: only track when ball is coming toward it
+      const aiMax = padSpeed * 0.92;
       const target = (state.ball.vx > 0) ? (state.ball.y - state.r.h/2) : (H/2 - state.r.h/2);
-      const dir = Math.sign(target - state.r.y);
-      state.r.y += dir * aiMax * dt;
-      // small jitter for style
-      state.r.y += Math.sin(performance.now()/140) * 10 * dt;
+      const diff = clamp(target - state.r.y, -aiMax*dt, aiMax*dt);
+      state.r.y += diff + Math.sin(performance.now()/140) * 10 * dt; // tiny jitter
     }
 
     state.l.y = clamp(state.l.y, 0, H - state.l.h);
     state.r.y = clamp(state.r.y, 0, H - state.r.h);
 
-    // Ball movement
+    // Ball motion
     state.ball.x += state.ball.vx * dt;
     state.ball.y += state.ball.vy * dt;
 
@@ -211,21 +273,21 @@
     if(state.ball.y - state.ball.r < 0){ state.ball.y = state.ball.r; state.ball.vy *= -1; }
     if(state.ball.y + state.ball.r > H){ state.ball.y = H - state.ball.r; state.ball.vy *= -1; }
 
-    // Paddles collision
+    // Paddles
     collidePaddle(state.l, 1);
     collidePaddle(state.r, -1);
 
     // Score
     if(state.ball.x + state.ball.r < 0){
-      // Right scores
       state.scoreR++; rScoreEl.textContent = String(state.scoreR);
+      haptics(20);
       centerPaddles();
       if(checkWin()) return;
       resetBall(1);
     }
     if(state.ball.x - state.ball.r > W){
-      // Left scores
       state.scoreL++; lScoreEl.textContent = String(state.scoreL);
+      haptics(20);
       centerPaddles();
       if(checkWin()) return;
       resetBall(-1);
@@ -236,42 +298,44 @@
     if(state.scoreL >= state.maxScore || state.scoreR >= state.maxScore){
       running = false;
       showOverlay(`${state.scoreL>=state.maxScore? 'LEFT' : 'RIGHT'} WINS`, 'Press Reset to play again');
+      haptics(40);
       return true;
     }
     return false;
   }
 
   function collidePaddle(p, dir){
-    // dir: +1 for left paddle (ball should go right after), -1 for right
     const bx = state.ball.x, by = state.ball.y, br = state.ball.r;
     if(bx - br < p.x + p.w && bx + br > p.x && by + br > p.y && by - br < p.y + p.h){
-      // Put ball outside paddle
+      // place ball just outside
       if(dir === 1) state.ball.x = p.x + p.w + br + 0.5; else state.ball.x = p.x - br - 0.5;
-      // Compute bounce angle depending on impact point
       const rel = (by - (p.y + p.h/2)) / (p.h/2); // -1..1
       const maxA = 1.2; // ~69°
       const ang = rel * maxA;
       const speed = Math.min(900, Math.hypot(state.ball.vx, state.ball.vy) * 1.04 + 6);
       state.ball.vx = Math.cos(ang) * speed * dir;
       state.ball.vy = Math.sin(ang) * speed;
+      haptics(8);
     }
   }
 
   function neonStroke(x1,y1,x2,y2,w,color){
     ctx.save();
-    ctx.strokeStyle=color; ctx.lineWidth=w; ctx.globalAlpha=0.95; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    ctx.strokeStyle=color; ctx.lineWidth=w; ctx.globalAlpha=0.95;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2);
     ctx.shadowColor=color; ctx.shadowBlur=18; ctx.stroke();
     ctx.restore();
   }
 
   function draw(){
-    // Slight motion trail for cyber feel
+    // Motion trail
     ctx.fillStyle = 'rgba(5,6,13,0.35)';
     ctx.fillRect(0,0,W,H);
 
     // Court edges
-    neonStroke(8, 8, W-8, 8, 2, getComputedStyle(document.documentElement).getPropertyValue('--neon1'));
-    neonStroke(8, H-8, W-8, H-8, 2, getComputedStyle(document.documentElement).getPropertyValue('--neon1'));
+    const c1 = getComputedStyle(document.documentElement).getPropertyValue('--neon1');
+    neonStroke(8, 8, W-8, 8, 2, c1);
+    neonStroke(8, H-8, W-8, H-8, 2, c1);
 
     // Paddles
     drawNeonRect(state.l.x, state.l.y, state.l.w, state.l.h, '#ff00ea');
@@ -296,7 +360,7 @@
   }
 
   function loop(t){
-    const dt = Math.min(0.033, (t - last) / 1000 || 0); // cap dt
+    const dt = Math.min(0.033, (t - last) / 1000 || 0);
     last = t;
     if(running){ update(dt); }
     draw();
@@ -306,7 +370,6 @@
   function start(){
     startOverlay.style.display = 'none'; running = true; last = performance.now();
   }
-
   function pause(){ running = false; }
   function showOverlay(title, hint){
     startOverlay.style.display = 'grid';
@@ -314,12 +377,12 @@
     startOverlay.querySelector('.subtitle').textContent = hint || 'Tap or press ▶ to begin';
   }
 
-  // Events
-  window.addEventListener('resize', resize);
-  resize();
-  resetAll();
-  draw();
-  requestAnimationFrame(loop);
+  // Simple haptics for mobile
+  function haptics(ms){ if (navigator.vibrate) navigator.vibrate(ms); }
+
+  // ----- Events -----
+  window.addEventListener('resize', resize, {passive:true});
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden) pause(); });
 
   // Keyboard
   window.addEventListener('keydown', (e)=>{
@@ -327,24 +390,82 @@
     if(e.code === 'Space'){ running ? pause() : start(); }
     if(e.code === 'Digit1'){ toggleMode(); }
   });
-  window.addEventListener('keyup', (e)=>{
-    keys.delete(e.code);
-  });
+  window.addEventListener('keyup', (e)=> keys.delete(e.code));
 
-  // Pointer/touch: drag to move paddles. If 1P, left controls player; if 2P, left half controls left, right half controls right.
-  canvas.addEventListener('pointerdown', ()=>{ if(!running) start(); });
-  canvas.addEventListener('pointermove', (e)=>{
+  // --- Mouse movement (hover) ---
+  // Move paddles just by moving the mouse over the canvas (no click needed)
+  canvas.addEventListener('mousemove', (e)=>{
     const rect = canvas.getBoundingClientRect();
-    const y = e.clientY - rect.top;
-    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top; const x = e.clientX - rect.left;
     if(!singlePlayer){
       if(x < W/2) state.l.y = clamp(y - state.l.h/2, 0, H - state.l.h);
       else state.r.y = clamp(y - state.r.h/2, 0, H - state.r.h);
     } else {
-      // always map to left paddle in 1P
       state.l.y = clamp(y - state.l.h/2, 0, H - state.l.h);
     }
   });
+
+  // Pointer (mouse/touch drag) — still supported
+  canvas.addEventListener('pointerdown', (e)=>{ if(!running) start(); canvas.setPointerCapture(e.pointerId); handlePointer(e); });
+  canvas.addEventListener('pointermove', handlePointer);
+  function handlePointer(e){
+    const rect = canvas.getBoundingClientRect();
+    const y = e.clientY - rect.top; const x = e.clientX - rect.left;
+    if(!singlePlayer){
+      if(x < W/2) state.l.y = clamp(y - state.l.h/2, 0, H - state.l.h);
+      else state.r.y = clamp(y - state.r.h/2, 0, H - state.r.h);
+    } else {
+      state.l.y = clamp(y - state.l.h/2, 0, H - state.l.h);
+    }
+  }
+
+  // Dedicated mobile touch pads (support multitouch nicely)
+  bindTouchPad(padL, (y)=>{ state.l.y = clamp(y - state.l.h/2, 0, H - state.l.h); });
+  bindTouchPad(padR, (y)=>{ state.r.y = clamp(y - state.r.h/2, 0, H - state.r.h); });
+  function bindTouchPad(el, onMove){
+    const toY = (e)=>{
+      const r = el.getBoundingClientRect();
+      const t = Array.from(e.changedTouches).find(t=> t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom);
+      return t ? t.clientY - r.top : null;
+    };
+    el.addEventListener('touchstart', (e)=>{ if(!running) start(); const y = toY(e); if(y!=null){ onMove(y); } }, {passive:false});
+    el.addEventListener('touchmove',  (e)=>{ const y = toY(e); if(y!=null){ onMove(y); } e.preventDefault(); }, {passive:false});
+  }
+
+  // --- Tilt controls (DeviceOrientation) ---
+  async function toggleTilt(){
+    if(tiltActive){ disableTilt(); return; }
+    // iOS requires permission
+    try{
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+        const perm = await DeviceOrientationEvent.requestPermission();
+        if(perm !== 'granted'){ return; }
+      }
+      enableTilt();
+    }catch(e){ /* ignored */ }
+  }
+
+  function enableTilt(){
+    if(tiltActive) return;
+    tiltActive = true; tiltBtn.textContent = 'Tilt: ON';
+    let targetY = state.l.y;
+    tiltHandler = (e)=>{
+      // beta ≈ front/back tilt in portrait (-180..180). Map to 0..H
+      const beta = (e.beta == null ? 0 : e.beta); // fallback
+      const norm = (beta + 90) / 180; // approx 0..1 for -90..90
+      targetY = clamp(norm * H - state.l.h/2, 0, H - state.l.h);
+      // smooth for steadiness
+      state.l.y = lerp(state.l.y, targetY, 0.25);
+    };
+    window.addEventListener('deviceorientation', tiltHandler);
+  }
+
+  function disableTilt(){
+    if(!tiltActive) return;
+    tiltActive = false; tiltBtn.textContent = 'Tilt: OFF';
+    if(tiltHandler) window.removeEventListener('deviceorientation', tiltHandler);
+    tiltHandler = null;
+  }
 
   // Buttons
   startBtn.addEventListener('click', start);
@@ -352,6 +473,7 @@
   pauseBtn.addEventListener('click', ()=>{ running ? pause() : start(); });
   resetBtn.addEventListener('click', ()=>{ resetAll(); showOverlay('CYBERPUNK PONG_2077', 'Tap or press ▶ to begin'); });
   modeBtn.addEventListener('click', toggleMode);
+  tiltBtn.addEventListener('click', toggleTilt);
   scanBtn.addEventListener('click', ()=>{
     const on = scan.style.display !== 'none';
     scan.style.display = on ? 'none' : 'block';
@@ -362,6 +484,12 @@
     singlePlayer = !singlePlayer;
     modeBtn.textContent = singlePlayer ? '1P vs AI' : '2P Local';
   }
+
+  // Boot
+  resize();
+  resetAll();
+  draw();
+  requestAnimationFrame(loop);
 })();
 </script>
 </body>
