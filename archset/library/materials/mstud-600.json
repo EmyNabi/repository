@@ -1,0 +1,15 @@
+{
+  "id": "mstud-600",
+  "name": "Steel stud 6\" 20 ga",
+  "code": "ms600",
+  "category": "framing",
+  "units": "imperial",
+  "thickness": 152.4,
+  "cut": {
+    "pattern": "none",
+    "scale": 1.0
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

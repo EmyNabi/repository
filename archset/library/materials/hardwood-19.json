@@ -1,0 +1,15 @@
+{
+  "id": "hardwood-19",
+  "name": "Hardwood flooring 3/4\"",
+  "code": "hw",
+  "category": "flooring",
+  "units": "imperial",
+  "thickness": 19.05,
+  "cut": {
+    "pattern": "wood-grain",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

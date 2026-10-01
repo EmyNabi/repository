@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/template.schema.json",
+  "title": "Assembly template",
+  "description": "A parametric assembly. Fixed layers are copied as-is; slots are filled from parameters. Generated variants never inherit ratings.",
+  "type": "object",
+  "required": ["id", "kind", "name", "units", "layers"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "kind": { "$ref": "common.schema.json#/$defs/kind" },
+    "name": { "type": "string", "description": "May reference slot values: {cladding}, {structure}." },
+    "units": { "$ref": "common.schema.json#/$defs/units" },
+    "location_line": { "$ref": "assembly.schema.json#/properties/location_line" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "oneOf": [ { "$ref": "#/$defs/fixed" }, { "$ref": "#/$defs/slot" } ] }
+    }
+  },
+  "$defs": {
+    "fixed": {
+      "type": "object",
+      "required": ["material", "function"],
+      "additionalProperties": false,
+      "properties": {
+        "material": { "$ref": "common.schema.json#/$defs/id" },
+        "thickness": { "$ref": "common.schema.json#/$defs/mm", "description": "Defaults to the material's thickness." },
+        "function": { "$ref": "common.schema.json#/$defs/function" },
+        "core": { "type": "boolean" }
+      }
+    },
+    "slot": {
+      "type": "object",
+      "required": ["slot", "function", "choices"],
+      "additionalProperties": false,
+      "properties": {
+        "slot": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Parameter name for the material choice." },
+        "label": { "type": "string" },
+        "function": { "$ref": "common.schema.json#/$defs/function" },
+        "core": { "type": "boolean" },
+        "choices": { "type": "array", "minItems": 1, "items": { "$ref": "common.schema.json#/$defs/id" }, "uniqueItems": true },
+        "default": { "$ref": "common.schema.json#/$defs/id" },
+        "thickness": {
+          "description": "Thickness options in mm. 0 means the layer is omitted. Absent: use the material thickness.",
+          "$ref": "#/$defs/numberChoice"
+        },
+        "count": {
+          "description": "How many times the layer repeats (e.g. layers of gypsum).",
+          "type": "object",
+          "required": ["min", "max"],
+          "additionalProperties": false,
+          "properties": {
+            "min": { "type": "integer", "minimum": 1 },
+            "max": { "type": "integer", "minimum": 1 },
+            "default": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "spacing": { "description": "Framing slots only: spacing options in mm.", "$ref": "#/$defs/numberChoice" },
+        "cavity_fill": {
+          "description": "Framing slots only: cavity insulation choices. \"none\" leaves the cavity empty.",
+          "type": "object",
+          "required": ["choices"],
+          "additionalProperties": false,
+          "properties": {
+            "choices": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
+            "default": { "type": "string" }
+          }
+        }
+      }
+    },
+    "numberChoice": {
+      "type": "object",
+      "required": ["options"],
+      "additionalProperties": false,
+      "properties": {
+        "options": { "type": "array", "minItems": 1, "items": { "type": "number", "minimum": 0 }, "uniqueItems": true },
+        "default": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

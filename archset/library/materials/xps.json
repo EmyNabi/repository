@@ -1,0 +1,14 @@
+{
+  "id": "xps",
+  "name": "Extruded polystyrene board",
+  "code": "xps",
+  "category": "insulation",
+  "thickness": 50,
+  "cut": {
+    "pattern": "foam",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

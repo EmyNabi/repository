@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/rule.schema.json",
+  "title": "Rule",
+  "description": "A named choice with a default. Resolution: object, then view, then project, then office default.",
+  "type": "object",
+  "required": ["id", "kind", "label", "options", "default", "scopes"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "kind": { "enum": ["setting", "check"] },
+    "label": { "type": "string" },
+    "options": { "type": "array", "minItems": 1, "uniqueItems": true },
+    "default": {},
+    "scopes": { "type": "array", "minItems": 1, "items": { "enum": ["office", "project", "view", "object"] }, "uniqueItems": true },
+    "why": { "type": "string" },
+    "source": { "type": ["string", "null"], "description": "Code-driven checks must cite the office table they read. null = TODO-SOURCE." }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "osb-11.1",
+  "name": "OSB 7/16\"",
+  "code": "osb",
+  "category": "sheathing",
+  "units": "imperial",
+  "thickness": 11.1,
+  "cut": {
+    "pattern": "plywood",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

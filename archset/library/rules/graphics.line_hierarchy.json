@@ -1,0 +1,16 @@
+{
+  "id": "graphics.line_hierarchy",
+  "kind": "setting",
+  "label": "Line weight hierarchy",
+  "options": [
+    "standard",
+    "custom_pen_table"
+  ],
+  "default": "standard",
+  "scopes": [
+    "office",
+    "project",
+    "view"
+  ],
+  "why": "Cut outline > layer line > projection > beyond"
+}

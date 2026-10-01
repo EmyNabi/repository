@@ -1,0 +1,16 @@
+{
+  "id": "dimensions.reference",
+  "kind": "setting",
+  "label": "Dimension reference",
+  "options": [
+    "face_of_stud",
+    "centerline",
+    "face_of_finish"
+  ],
+  "default": "face_of_stud",
+  "scopes": [
+    "office",
+    "project",
+    "view"
+  ]
+}

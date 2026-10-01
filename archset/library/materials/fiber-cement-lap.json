@@ -1,0 +1,16 @@
+{
+  "id": "fiber-cement-lap",
+  "name": "Fiber cement lap siding",
+  "code": "fc",
+  "category": "cladding",
+  "thickness": 16,
+  "cut": {
+    "pattern": "solid",
+    "scale": 1,
+    "background": "#bfbfbf"
+  },
+  "elevation": {
+    "pattern": "lap",
+    "module": 178
+  }
+}

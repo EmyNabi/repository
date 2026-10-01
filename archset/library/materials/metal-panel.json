@@ -1,0 +1,17 @@
+{
+  "id": "metal-panel",
+  "name": "Metal wall panel",
+  "code": "mp",
+  "category": "cladding",
+  "thickness": 25,
+  "cut": {
+    "pattern": "solid",
+    "scale": 1,
+    "background": "#8c8c8c"
+  },
+  "elevation": {
+    "pattern": "standing-seam",
+    "module": 406,
+    "orientation": "vertical"
+  }
+}

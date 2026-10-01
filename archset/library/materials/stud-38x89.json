@@ -1,0 +1,15 @@
+{
+  "id": "stud-38x89",
+  "name": "Wood stud 38x89",
+  "code": "89",
+  "category": "framing",
+  "units": "metric",
+  "thickness": 89,
+  "cut": {
+    "pattern": "framing-x",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

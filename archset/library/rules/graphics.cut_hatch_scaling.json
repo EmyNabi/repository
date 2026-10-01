@@ -1,0 +1,16 @@
+{
+  "id": "graphics.cut_hatch_scaling",
+  "kind": "setting",
+  "label": "Cut hatch scaling",
+  "options": [
+    "paper",
+    "model"
+  ],
+  "default": "paper",
+  "scopes": [
+    "office",
+    "project",
+    "view"
+  ],
+  "why": "Hatches print at the same density at any scale"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "stud-2x8",
+  "name": "Wood stud 2x8",
+  "code": "2x8",
+  "category": "framing",
+  "units": "imperial",
+  "thickness": 184.15,
+  "cut": {
+    "pattern": "framing-x",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

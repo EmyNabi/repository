@@ -1,0 +1,14 @@
+{
+  "id": "mw-board",
+  "name": "Mineral wool board",
+  "code": "mwb",
+  "category": "insulation",
+  "thickness": 50,
+  "cut": {
+    "pattern": "insulation-rigid",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

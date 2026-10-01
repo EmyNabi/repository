@@ -1,0 +1,15 @@
+{
+  "id": "osb-11",
+  "name": "OSB 11",
+  "code": "osb",
+  "category": "sheathing",
+  "units": "metric",
+  "thickness": 11,
+  "cut": {
+    "pattern": "plywood",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

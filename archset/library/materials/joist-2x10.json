@@ -1,0 +1,15 @@
+{
+  "id": "joist-2x10",
+  "name": "Wood joist 2x10",
+  "code": "j210",
+  "category": "framing",
+  "units": "imperial",
+  "thickness": 234.95,
+  "cut": {
+    "pattern": "framing-x",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

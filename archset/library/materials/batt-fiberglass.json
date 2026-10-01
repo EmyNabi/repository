@@ -1,0 +1,15 @@
+{
+  "id": "batt-fiberglass",
+  "name": "Fiberglass batt",
+  "code": "fg",
+  "category": "insulation",
+  "thickness": 89,
+  "fill": true,
+  "cut": {
+    "pattern": "batt",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

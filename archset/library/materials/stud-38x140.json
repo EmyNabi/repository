@@ -1,0 +1,15 @@
+{
+  "id": "stud-38x140",
+  "name": "Wood stud 38x140",
+  "code": "140",
+  "category": "framing",
+  "units": "metric",
+  "thickness": 140,
+  "cut": {
+    "pattern": "framing-x",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

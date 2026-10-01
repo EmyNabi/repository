@@ -1,0 +1,15 @@
+{
+  "id": "gwb-12.5",
+  "name": "Gypsum board 12.5",
+  "code": "g",
+  "category": "gypsum",
+  "units": "metric",
+  "thickness": 12.5,
+  "cut": {
+    "pattern": "dots",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

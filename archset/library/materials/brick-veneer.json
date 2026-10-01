@@ -1,0 +1,15 @@
+{
+  "id": "brick-veneer",
+  "name": "Brick veneer",
+  "code": "brk",
+  "category": "masonry",
+  "thickness": 92,
+  "cut": {
+    "pattern": "brick",
+    "scale": 1.5
+  },
+  "elevation": {
+    "pattern": "running-bond",
+    "module": 67
+  }
+}

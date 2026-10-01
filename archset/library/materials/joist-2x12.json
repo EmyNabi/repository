@@ -1,0 +1,15 @@
+{
+  "id": "joist-2x12",
+  "name": "Wood joist 2x12",
+  "code": "j212",
+  "category": "framing",
+  "units": "imperial",
+  "thickness": 285.75,
+  "cut": {
+    "pattern": "framing-x",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

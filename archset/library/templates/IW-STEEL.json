@@ -1,0 +1,68 @@
+{
+  "id": "IW-STEEL",
+  "kind": "wall",
+  "name": "Interior steel stud partition",
+  "units": "imperial",
+  "location_line": "wall_center",
+  "tags": [
+    "interior",
+    "type-i-ii"
+  ],
+  "layers": [
+    {
+      "slot": "gypsum_a",
+      "label": "Gypsum, side A",
+      "function": "finish_int",
+      "choices": [
+        "gwb-12.7",
+        "gwb-x-15.9"
+      ],
+      "default": "gwb-x-15.9",
+      "count": {
+        "min": 1,
+        "max": 2,
+        "default": 1
+      }
+    },
+    {
+      "slot": "structure",
+      "label": "Studs",
+      "function": "structure",
+      "core": true,
+      "choices": [
+        "mstud-362",
+        "mstud-600"
+      ],
+      "default": "mstud-362",
+      "spacing": {
+        "options": [
+          406.4,
+          609.6
+        ],
+        "default": 609.6
+      },
+      "cavity_fill": {
+        "choices": [
+          "none",
+          "batt-mineral-wool"
+        ],
+        "default": "batt-mineral-wool"
+      }
+    },
+    {
+      "slot": "gypsum_b",
+      "label": "Gypsum, side B",
+      "function": "finish_int",
+      "choices": [
+        "gwb-12.7",
+        "gwb-x-15.9"
+      ],
+      "default": "gwb-x-15.9",
+      "count": {
+        "min": 1,
+        "max": 2,
+        "default": 1
+      }
+    }
+  ]
+}

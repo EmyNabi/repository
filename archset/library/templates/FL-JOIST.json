@@ -1,0 +1,70 @@
+{
+  "id": "FL-JOIST",
+  "kind": "floor",
+  "name": "Wood joist floor, {finish}",
+  "units": "imperial",
+  "location_line": "finish_ext",
+  "tags": [
+    "floor",
+    "type-v"
+  ],
+  "layers": [
+    {
+      "slot": "finish",
+      "label": "Finish",
+      "function": "finish_top",
+      "choices": [
+        "hardwood-19",
+        "tile-10"
+      ],
+      "default": "hardwood-19"
+    },
+    {
+      "material": "plywood-19",
+      "function": "substrate",
+      "core": true
+    },
+    {
+      "slot": "structure",
+      "label": "Joists",
+      "function": "structure",
+      "core": true,
+      "choices": [
+        "joist-2x10",
+        "joist-2x12"
+      ],
+      "default": "joist-2x10",
+      "spacing": {
+        "options": [
+          304.8,
+          406.4,
+          609.6
+        ],
+        "default": 406.4
+      },
+      "cavity_fill": {
+        "choices": [
+          "none",
+          "batt-fiberglass",
+          "batt-mineral-wool"
+        ],
+        "default": "batt-fiberglass"
+      }
+    },
+    {
+      "slot": "ceiling",
+      "label": "Ceiling",
+      "function": "ceiling",
+      "choices": [
+        "gwb-12.7",
+        "gwb-x-15.9"
+      ],
+      "default": "gwb-x-15.9",
+      "count": {
+        "min": 1,
+        "max": 2,
+        "default": 1
+      }
+    }
+  ]
+}

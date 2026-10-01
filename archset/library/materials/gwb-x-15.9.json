@@ -1,0 +1,15 @@
+{
+  "id": "gwb-x-15.9",
+  "name": "Gypsum board 5/8\" Type X",
+  "code": "gx",
+  "category": "gypsum",
+  "units": "imperial",
+  "thickness": 15.875,
+  "cut": {
+    "pattern": "dots",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

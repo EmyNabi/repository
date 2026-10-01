@@ -1,0 +1,14 @@
+{
+  "id": "furring-air-gap",
+  "name": "Furring and air gap",
+  "code": "air",
+  "category": "air",
+  "thickness": 19,
+  "cut": {
+    "pattern": "none",
+    "scale": 1.0
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

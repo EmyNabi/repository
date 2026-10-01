@@ -1,0 +1,15 @@
+{
+  "id": "plywood-12.7",
+  "name": "Plywood 1/2\"",
+  "code": "ply",
+  "category": "sheathing",
+  "units": "imperial",
+  "thickness": 12.7,
+  "cut": {
+    "pattern": "plywood",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

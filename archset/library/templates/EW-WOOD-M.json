@@ -1,0 +1,104 @@
+{
+  "id": "EW-WOOD-M",
+  "kind": "wall",
+  "name": "Exterior timber frame, {cladding}",
+  "units": "metric",
+  "location_line": "core_center",
+  "tags": [
+    "exterior"
+  ],
+  "layers": [
+    {
+      "slot": "cladding",
+      "label": "Cladding",
+      "function": "finish_ext",
+      "choices": [
+        "fiber-cement-lap",
+        "brick-veneer",
+        "metal-panel"
+      ],
+      "default": "fiber-cement-lap"
+    },
+    {
+      "material": "furring-air-gap",
+      "function": "cavity"
+    },
+    {
+      "slot": "ci",
+      "label": "Continuous insulation",
+      "function": "insulation",
+      "choices": [
+        "mw-board",
+        "xps"
+      ],
+      "default": "mw-board",
+      "thickness": {
+        "options": [
+          0,
+          25,
+          50,
+          75,
+          100
+        ],
+        "default": 50
+      }
+    },
+    {
+      "material": "wrb",
+      "function": "membrane"
+    },
+    {
+      "slot": "sheathing",
+      "label": "Sheathing",
+      "function": "substrate",
+      "core": true,
+      "choices": [
+        "plywood-12",
+        "osb-11"
+      ],
+      "default": "osb-11"
+    },
+    {
+      "slot": "structure",
+      "label": "Studs",
+      "function": "structure",
+      "core": true,
+      "choices": [
+        "stud-38x89",
+        "stud-38x140",
+        "stud-38x184"
+      ],
+      "default": "stud-38x140",
+      "spacing": {
+        "options": [
+          400,
+          600
+        ],
+        "default": 600
+      },
+      "cavity_fill": {
+        "choices": [
+          "none",
+          "batt-mineral-wool",
+          "batt-fiberglass"
+        ],
+        "default": "batt-mineral-wool"
+      }
+    },
+    {
+      "slot": "gypsum",
+      "label": "Gypsum",
+      "function": "finish_int",
+      "choices": [
+        "gwb-12.5",
+        "gwb-f-15"
+      ],
+      "default": "gwb-12.5",
+      "count": {
+        "min": 1,
+        "max": 2,
+        "default": 1
+      }
+    }
+  ]
+}

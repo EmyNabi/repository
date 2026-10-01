@@ -1,0 +1,15 @@
+{
+  "id": "plywood-12",
+  "name": "Plywood 12",
+  "code": "ply",
+  "category": "sheathing",
+  "units": "metric",
+  "thickness": 12,
+  "cut": {
+    "pattern": "plywood",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

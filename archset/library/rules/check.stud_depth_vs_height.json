@@ -1,0 +1,15 @@
+{
+  "id": "check.stud_depth_vs_height",
+  "kind": "check",
+  "label": "Stud depth vs wall height",
+  "options": [
+    "office_table",
+    "project_table"
+  ],
+  "default": "office_table",
+  "scopes": [
+    "office",
+    "project"
+  ],
+  "source": null
+}

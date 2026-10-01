@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/layer.schema.json",
+  "title": "Layer",
+  "type": "object",
+  "required": ["material", "thickness", "function"],
+  "additionalProperties": false,
+  "properties": {
+    "material": { "$ref": "common.schema.json#/$defs/id" },
+    "thickness": { "$ref": "common.schema.json#/$defs/mm" },
+    "function": { "$ref": "common.schema.json#/$defs/function" },
+    "core": { "type": "boolean", "default": false },
+    "variable": { "type": "boolean", "default": false, "description": "Thickness may vary per instance (e.g. tapered insulation)." },
+    "spacing": { "$ref": "common.schema.json#/$defs/mm", "description": "Framing layers only: member spacing on center." },
+    "cavity_fill": { "$ref": "common.schema.json#/$defs/id", "description": "Framing layers only: material filling the cavity." }
+  }
+}

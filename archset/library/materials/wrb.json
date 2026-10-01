@@ -1,0 +1,15 @@
+{
+  "id": "wrb",
+  "name": "Weather-resistive barrier",
+  "code": "wrb",
+  "category": "membrane",
+  "thickness": 1,
+  "cut": {
+    "pattern": "solid",
+    "scale": 1,
+    "background": "#000000"
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

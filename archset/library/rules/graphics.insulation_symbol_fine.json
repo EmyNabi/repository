@@ -1,0 +1,15 @@
+{
+  "id": "graphics.insulation_symbol_fine",
+  "kind": "setting",
+  "label": "Insulation symbol at fine detail",
+  "options": [
+    "batt_symbol",
+    "hatch_only"
+  ],
+  "default": "batt_symbol",
+  "scopes": [
+    "office",
+    "project",
+    "view"
+  ]
+}

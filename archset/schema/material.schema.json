@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/material.schema.json",
+  "title": "Material",
+  "description": "Graphics belong to materials. Every layer that uses this material draws with these properties.",
+  "type": "object",
+  "required": ["id", "name", "code", "category", "thickness", "cut", "elevation"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "name": { "type": "string", "minLength": 1 },
+    "code": {
+      "type": "string",
+      "pattern": "^[a-z0-9]{1,8}$",
+      "description": "Short code used to build generated assembly IDs."
+    },
+    "category": {
+      "enum": ["cladding", "air", "membrane", "sheathing", "framing", "insulation", "board", "gypsum", "flooring", "masonry", "concrete"]
+    },
+    "units": { "$ref": "common.schema.json#/$defs/units" },
+    "thickness": { "$ref": "common.schema.json#/$defs/mm", "description": "Default (actual, not nominal) thickness in mm." },
+    "fill": {
+      "type": "boolean",
+      "default": false,
+      "description": "True for materials that fill a framing cavity (batt, spray foam) rather than form their own layer."
+    },
+    "cut": {
+      "type": "object",
+      "description": "Cut hatch: what shows where the layer is sliced.",
+      "required": ["pattern", "scale"],
+      "additionalProperties": false,
+      "properties": {
+        "pattern": { "type": "string" },
+        "scale": { "type": "number", "exclusiveMinimum": 0, "description": "Paper units, so it prints the same at any drawing scale." },
+        "rotation": { "type": "number", "default": 0 },
+        "color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "default": "#000000" },
+        "background": { "type": ["string", "null"], "pattern": "^#[0-9a-fA-F]{6}$", "default": null }
+      }
+    },
+    "elevation": {
+      "type": "object",
+      "description": "Elevation hatch: the surface seen head-on.",
+      "required": ["pattern"],
+      "additionalProperties": false,
+      "properties": {
+        "pattern": { "type": "string" },
+        "module": { "$ref": "common.schema.json#/$defs/mm", "description": "Real-world module so coursing is true (brick course, siding exposure)." },
+        "orientation": { "enum": ["horizontal", "vertical"], "default": "horizontal" },
+        "line": { "$ref": "common.schema.json#/$defs/lineRole", "default": "projection" }
+      }
+    }
+  }
+}

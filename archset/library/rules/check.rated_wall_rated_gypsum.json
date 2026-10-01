@@ -1,0 +1,14 @@
+{
+  "id": "check.rated_wall_rated_gypsum",
+  "kind": "check",
+  "label": "Rated wall uses rated gypsum",
+  "options": [
+    true,
+    false
+  ],
+  "default": true,
+  "scopes": [
+    "office",
+    "project"
+  ]
+}

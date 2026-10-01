@@ -1,0 +1,15 @@
+{
+  "id": "gwb-f-15",
+  "name": "Gypsum board 15 Type F",
+  "code": "gf",
+  "category": "gypsum",
+  "units": "metric",
+  "thickness": 15,
+  "cut": {
+    "pattern": "dots",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

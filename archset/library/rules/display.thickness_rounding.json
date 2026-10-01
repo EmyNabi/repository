@@ -1,0 +1,16 @@
+{
+  "id": "display.thickness_rounding",
+  "kind": "setting",
+  "label": "Thickness display rounding",
+  "options": [
+    "1/8in",
+    "1/16in",
+    "1/4in"
+  ],
+  "default": "1/8in",
+  "scopes": [
+    "office",
+    "project",
+    "view"
+  ]
+}

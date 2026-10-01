@@ -1,0 +1,15 @@
+{
+  "id": "gwb-12.7",
+  "name": "Gypsum board 1/2\"",
+  "code": "g",
+  "category": "gypsum",
+  "units": "imperial",
+  "thickness": 12.7,
+  "cut": {
+    "pattern": "dots",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

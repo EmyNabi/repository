@@ -1,0 +1,15 @@
+{
+  "id": "stud-38x184",
+  "name": "Wood stud 38x184",
+  "code": "184",
+  "category": "framing",
+  "units": "metric",
+  "thickness": 184,
+  "cut": {
+    "pattern": "framing-x",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

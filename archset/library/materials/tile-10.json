@@ -1,0 +1,15 @@
+{
+  "id": "tile-10",
+  "name": "Tile on setting bed",
+  "code": "tl",
+  "category": "flooring",
+  "thickness": 10,
+  "cut": {
+    "pattern": "solid",
+    "scale": 1,
+    "background": "#d9d9d9"
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

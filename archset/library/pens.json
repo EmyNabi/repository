@@ -1,0 +1,53 @@
+{
+  "id": "office-default",
+  "scales": [
+    {
+      "scale": 96,
+      "label": "1/8\" = 1'-0\"",
+      "detail": "coarse",
+      "weights": {
+        "cut_outline": 0.5,
+        "cut_layer": 0.13,
+        "projection": 0.25,
+        "beyond": 0.13,
+        "hidden": 0.13
+      }
+    },
+    {
+      "scale": 48,
+      "label": "1/4\" = 1'-0\"",
+      "detail": "medium",
+      "weights": {
+        "cut_outline": 0.5,
+        "cut_layer": 0.18,
+        "projection": 0.25,
+        "beyond": 0.13,
+        "hidden": 0.13
+      }
+    },
+    {
+      "scale": 24,
+      "label": "1/2\" = 1'-0\"",
+      "detail": "fine",
+      "weights": {
+        "cut_outline": 0.7,
+        "cut_layer": 0.25,
+        "projection": 0.35,
+        "beyond": 0.18,
+        "hidden": 0.18
+      }
+    },
+    {
+      "scale": 12,
+      "label": "1\" = 1'-0\"",
+      "detail": "fine",
+      "weights": {
+        "cut_outline": 0.7,
+        "cut_layer": 0.25,
+        "projection": 0.35,
+        "beyond": 0.18,
+        "hidden": 0.18
+      }
+    }
+  ]
+}

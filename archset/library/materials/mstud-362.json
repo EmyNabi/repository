@@ -1,0 +1,15 @@
+{
+  "id": "mstud-362",
+  "name": "Steel stud 3-5/8\" 20 ga",
+  "code": "ms362",
+  "category": "framing",
+  "units": "imperial",
+  "thickness": 92.1,
+  "cut": {
+    "pattern": "none",
+    "scale": 1.0
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

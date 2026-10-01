@@ -1,0 +1,68 @@
+{
+  "id": "IW-WOOD",
+  "kind": "wall",
+  "name": "Interior wood stud partition",
+  "units": "imperial",
+  "location_line": "wall_center",
+  "tags": [
+    "interior"
+  ],
+  "layers": [
+    {
+      "slot": "gypsum_a",
+      "label": "Gypsum, side A",
+      "function": "finish_int",
+      "choices": [
+        "gwb-12.7",
+        "gwb-x-15.9"
+      ],
+      "default": "gwb-12.7",
+      "count": {
+        "min": 1,
+        "max": 2,
+        "default": 1
+      }
+    },
+    {
+      "slot": "structure",
+      "label": "Studs",
+      "function": "structure",
+      "core": true,
+      "choices": [
+        "stud-2x4",
+        "stud-2x6"
+      ],
+      "default": "stud-2x4",
+      "spacing": {
+        "options": [
+          406.4,
+          609.6
+        ],
+        "default": 406.4
+      },
+      "cavity_fill": {
+        "choices": [
+          "none",
+          "batt-fiberglass",
+          "batt-mineral-wool"
+        ],
+        "default": "none"
+      }
+    },
+    {
+      "slot": "gypsum_b",
+      "label": "Gypsum, side B",
+      "function": "finish_int",
+      "choices": [
+        "gwb-12.7",
+        "gwb-x-15.9"
+      ],
+      "default": "gwb-12.7",
+      "count": {
+        "min": 1,
+        "max": 2,
+        "default": 1
+      }
+    }
+  ]
+}

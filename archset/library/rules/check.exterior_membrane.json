@@ -1,0 +1,14 @@
+{
+  "id": "check.exterior_membrane",
+  "kind": "check",
+  "label": "Exterior wall has continuous membrane layer",
+  "options": [
+    true,
+    false
+  ],
+  "default": true,
+  "scopes": [
+    "office",
+    "project"
+  ]
+}

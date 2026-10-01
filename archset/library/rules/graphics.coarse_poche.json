@@ -1,0 +1,17 @@
+{
+  "id": "graphics.coarse_poche",
+  "kind": "setting",
+  "label": "Wall poche at coarse detail",
+  "options": [
+    "solid_grey_40",
+    "solid_black",
+    "outline_only"
+  ],
+  "default": "solid_grey_40",
+  "scopes": [
+    "office",
+    "project",
+    "view"
+  ],
+  "why": "Reads clearly at 1/8 inch without competing with furniture"
+}

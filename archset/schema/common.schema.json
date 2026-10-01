@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/common.schema.json",
+  "title": "Shared definitions",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._~@+-]*$",
+      "description": "Stable identifier. Letters, digits and . _ - ~ @ +. Generated IDs read like EW-WOOD~fc~ply~2x6@16+fg~gx."
+    },
+    "mm": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "A length in millimeters. All lengths are stored in mm and converted only for display."
+    },
+    "lineRole": {
+      "enum": ["cut_outline", "cut_layer", "projection", "beyond", "hidden"],
+      "description": "Line weight is assigned by role, never by number. The pen table maps a role to mm per scale."
+    },
+    "units": { "enum": ["imperial", "metric"] },
+    "kind": { "enum": ["wall", "floor", "roof", "ceiling"] },
+    "function": {
+      "enum": ["finish_ext", "cavity", "membrane", "insulation", "substrate", "structure", "finish_int", "finish_top", "ceiling"],
+      "description": "What a layer does in the assembly. Walls run exterior to interior; floors run top to bottom."
+    },
+    "ratings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fire_hr": { "type": ["number", "null"], "minimum": 0 },
+        "stc": { "type": ["integer", "null"], "minimum": 0 },
+        "r_value": { "type": ["number", "null"], "minimum": 0 },
+        "source": {
+          "type": ["string", "null"],
+          "description": "Citation for the ratings, e.g. a UL design number. null means TODO-SOURCE: no rating may be shown as verified."
+        }
+      }
+    }
+  }
+}

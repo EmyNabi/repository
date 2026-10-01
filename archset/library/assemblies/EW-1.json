@@ -1,0 +1,59 @@
+{
+  "id": "EW-1",
+  "kind": "wall",
+  "name": "Exterior wood stud, fiber cement rainscreen",
+  "units": "imperial",
+  "location_line": "core_center",
+  "layers": [
+    {
+      "material": "fiber-cement-lap",
+      "thickness": 16,
+      "function": "finish_ext"
+    },
+    {
+      "material": "furring-air-gap",
+      "thickness": 19,
+      "function": "cavity"
+    },
+    {
+      "material": "wrb",
+      "thickness": 1,
+      "function": "membrane"
+    },
+    {
+      "material": "plywood-12.7",
+      "thickness": 12.7,
+      "function": "substrate",
+      "core": true
+    },
+    {
+      "material": "stud-2x6",
+      "thickness": 139.7,
+      "function": "structure",
+      "core": true,
+      "spacing": 406.4,
+      "cavity_fill": "batt-fiberglass"
+    },
+    {
+      "material": "gwb-x-15.9",
+      "thickness": 15.875,
+      "function": "finish_int"
+    }
+  ],
+  "ratings": {
+    "fire_hr": null,
+    "stc": null,
+    "r_value": null,
+    "source": null
+  },
+  "coarse": {
+    "poche": "solid-grey-40",
+    "outline": "cut_outline"
+  },
+  "tags": [
+    "exterior",
+    "type-v"
+  ],
+  "source": "office-standard",
+  "notes": "Seed example from the spec. Ratings are TODO-SOURCE until the Excel list supplies cited values."
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/assembly.schema.json",
+  "title": "Assembly",
+  "description": "An assembly is a type. Rhino objects store only its ID plus overrides. Total thickness is always the sum of layers, never stored.",
+  "type": "object",
+  "required": ["id", "kind", "name", "layers"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "kind": { "$ref": "common.schema.json#/$defs/kind" },
+    "name": { "type": "string", "minLength": 1 },
+    "units": { "$ref": "common.schema.json#/$defs/units" },
+    "location_line": { "enum": ["core_center", "wall_center", "finish_ext", "finish_int", "core_ext", "core_int"], "default": "core_center" },
+    "layers": { "type": "array", "minItems": 1, "items": { "$ref": "layer.schema.json" } },
+    "ratings": { "$ref": "common.schema.json#/$defs/ratings" },
+    "coarse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "poche": { "type": "string" },
+        "outline": { "$ref": "common.schema.json#/$defs/lineRole" }
+      }
+    },
+    "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "source": { "type": "string", "description": "Where this record came from: office-standard, excel:<row>, generated:<template>, or a person." },
+    "template": {
+      "type": "object",
+      "description": "Set on generated assemblies: the template and parameter values that produced it.",
+      "required": ["id", "params"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "params": { "type": "object" }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

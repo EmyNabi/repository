@@ -1,0 +1,15 @@
+{
+  "id": "spray-foam-cc",
+  "name": "Closed-cell spray foam",
+  "code": "spf",
+  "category": "insulation",
+  "thickness": 89,
+  "fill": true,
+  "cut": {
+    "pattern": "foam",
+    "scale": 1
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}

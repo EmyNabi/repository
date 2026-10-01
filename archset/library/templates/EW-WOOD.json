@@ -1,0 +1,106 @@
+{
+  "id": "EW-WOOD",
+  "kind": "wall",
+  "name": "Exterior wood stud, {cladding}",
+  "units": "imperial",
+  "location_line": "core_center",
+  "tags": [
+    "exterior",
+    "type-v"
+  ],
+  "layers": [
+    {
+      "slot": "cladding",
+      "label": "Cladding",
+      "function": "finish_ext",
+      "choices": [
+        "fiber-cement-lap",
+        "brick-veneer",
+        "metal-panel"
+      ],
+      "default": "fiber-cement-lap"
+    },
+    {
+      "material": "furring-air-gap",
+      "function": "cavity"
+    },
+    {
+      "slot": "ci",
+      "label": "Continuous insulation",
+      "function": "insulation",
+      "choices": [
+        "mw-board",
+        "xps"
+      ],
+      "default": "mw-board",
+      "thickness": {
+        "options": [
+          0,
+          25,
+          50,
+          75,
+          100
+        ],
+        "default": 0
+      }
+    },
+    {
+      "material": "wrb",
+      "function": "membrane"
+    },
+    {
+      "slot": "sheathing",
+      "label": "Sheathing",
+      "function": "substrate",
+      "core": true,
+      "choices": [
+        "plywood-12.7",
+        "osb-11.1"
+      ],
+      "default": "plywood-12.7"
+    },
+    {
+      "slot": "structure",
+      "label": "Studs",
+      "function": "structure",
+      "core": true,
+      "choices": [
+        "stud-2x4",
+        "stud-2x6",
+        "stud-2x8"
+      ],
+      "default": "stud-2x6",
+      "spacing": {
+        "options": [
+          406.4,
+          609.6
+        ],
+        "default": 406.4
+      },
+      "cavity_fill": {
+        "choices": [
+          "none",
+          "batt-fiberglass",
+          "batt-mineral-wool",
+          "spray-foam-cc"
+        ],
+        "default": "batt-fiberglass"
+      }
+    },
+    {
+      "slot": "gypsum",
+      "label": "Gypsum",
+      "function": "finish_int",
+      "choices": [
+        "gwb-12.7",
+        "gwb-x-15.9"
+      ],
+      "default": "gwb-x-15.9",
+      "count": {
+        "min": 1,
+        "max": 2,
+        "default": 1
+      }
+    }
+  ]
+}

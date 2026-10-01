@@ -1,0 +1,15 @@
+{
+  "id": "plywood-19",
+  "name": "Plywood subfloor 3/4\"",
+  "code": "sfp",
+  "category": "sheathing",
+  "units": "imperial",
+  "thickness": 19.05,
+  "cut": {
+    "pattern": "plywood",
+    "scale": 0.5
+  },
+  "elevation": {
+    "pattern": "none"
+  }
+}
