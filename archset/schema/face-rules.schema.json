@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/face-rules.schema.json",
+  "title": "Face rules",
+  "description": "What each face of a volume becomes. A rule's precedence comes from the most specific condition it uses: face_tag > volume_type (or other_volume_type) > adjacency > orientation. Ties go to the rule with more conditions, then to the earlier rule.",
+  "type": "object",
+  "required": ["rules"],
+  "additionalProperties": false,
+  "properties": {
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "flat_tolerance_deg": { "type": "number", "minimum": 0, "maximum": 45, "default": 5 },
+        "grade_tolerance": { "type": "number", "minimum": 0, "default": 50 }
+      }
+    },
+    "rules": { "type": "array", "items": { "$ref": "#/$defs/rule" } }
+  },
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "required": ["id", "when", "then"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "when": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "orientation": { "type": "array", "minItems": 1, "items": { "enum": ["vertical", "top", "bottom", "sloped_up", "sloped_down"] } },
+            "adjacency": { "type": "array", "minItems": 1, "items": { "enum": ["exposed", "shared", "ground"] } },
+            "volume_type": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "other_volume_type": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "face_tag": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+          }
+        },
+        "then": {
+          "type": "object",
+          "required": ["element"],
+          "additionalProperties": false,
+          "properties": {
+            "element": { "type": "string", "description": "Element kind, e.g. wall, roof, floor, slab_on_grade, soffit, interior_wall, party_wall, curtain_wall, storefront, or none." },
+            "side": { "enum": ["exterior", "interior"] },
+            "params": { "type": "object", "additionalProperties": { "type": "number" }, "description": "Numeric parameters handed to the element, e.g. overhang (mm)." }
+          }
+        },
+        "why": { "type": "string" }
+      }
+    }
+  }
+}

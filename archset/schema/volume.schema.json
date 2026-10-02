@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archset.dev/schema/volume.schema.json",
+  "title": "Volume",
+  "description": "A closed volume: the architecture. The host (Rhino) supplies its faces with normals, sizes and adjacency; the core decides what each face becomes. Lengths in mm, z up.",
+  "type": "object",
+  "required": ["id", "faces"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "type": { "type": "string", "description": "Volume type tag, e.g. room, unit, core, porch, attic. Drives volume-type rules." },
+    "name": { "type": "string" },
+    "faces": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/face" } }
+  },
+  "$defs": {
+    "face": {
+      "type": "object",
+      "required": ["id", "normal", "area"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "normal": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3, "description": "Outward normal." },
+        "area": { "type": "number", "minimum": 0, "description": "mm²" },
+        "width": { "type": "number", "minimum": 0, "description": "Horizontal extent, for vertical faces (mm)." },
+        "height": { "type": "number", "minimum": 0, "description": "Vertical extent, for vertical faces (mm)." },
+        "z_min": { "type": "number" },
+        "z_max": { "type": "number" },
+        "adjacent": {
+          "type": "object",
+          "description": "Set when this face is shared with another volume's face.",
+          "required": ["volume", "face"],
+          "additionalProperties": false,
+          "properties": { "volume": { "type": "string" }, "face": { "type": "string" } }
+        },
+        "tag": { "type": "string", "description": "Face tag set by a person or Claude; overrides every other rule." },
+        "openings": { "type": "array", "items": { "$ref": "#/$defs/opening" } }
+      }
+    },
+    "opening": {
+      "type": "object",
+      "description": "A cut or trim in the face. Its kind is assumed from proportion and location unless set.",
+      "required": ["id", "width", "height", "sill"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "sill": { "type": "number", "minimum": 0, "description": "Height of the opening's bottom above the face's bottom (mm)." },
+        "kind": { "type": "string", "description": "Explicit kind; skips the opening rules." }
+      }
+    }
+  }
+}

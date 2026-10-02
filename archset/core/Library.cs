@@ -11,6 +11,8 @@ public sealed class Library
     public required ImmutableSortedDictionary<string, Template> Templates { get; init; }
     /// <summary>Known assemblies (office standard, Excel import). Generated variants match against these for ratings.</summary>
     public required ImmutableList<Assembly> Known { get; init; }
+    /// <summary>Default volume rules (faces and openings); copied into each project, where they can be edited.</summary>
+    public RuleSet? VolumeRules { get; init; }
 
     public Material Material(string id) =>
         Materials.TryGetValue(id, out var m) ? m : throw new GeneratorException($"Unknown material '{id}'.");
@@ -34,6 +36,7 @@ public sealed class Library
             Known = Files(Path.Combine(root, "assemblies"))
                 .Select(f => JsonSerializer.Deserialize<Assembly>(File.ReadAllText(f), Json.Options)!)
                 .ToImmutableList(),
+            VolumeRules = Directory.Exists(Path.Combine(root, "volume-rules")) ? RuleSet.Load(Path.Combine(root, "volume-rules")) : null,
         };
     }
 

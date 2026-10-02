@@ -1,0 +1,16 @@
+{
+  "settings": { "flat_tolerance_deg": 5, "grade_tolerance": 50 },
+  "rules": [
+    { "id": "tag.storefront", "when": { "face_tag": ["storefront"] }, "then": { "element": "storefront", "side": "exterior" }, "why": "Face tagged storefront." },
+    { "id": "tag.curtain_wall", "when": { "face_tag": ["curtain_wall"] }, "then": { "element": "curtain_wall", "side": "exterior" }, "why": "Face tagged curtain wall." },
+    { "id": "tag.open", "when": { "face_tag": ["open"] }, "then": { "element": "none" }, "why": "Face tagged open: nothing is built here." },
+    { "id": "type.porch.open_sides", "when": { "volume_type": ["porch"], "orientation": ["vertical"], "adjacency": ["exposed"] }, "then": { "element": "none" }, "why": "Porches are open on their exposed sides by default." },
+    { "id": "type.unit.party_wall", "when": { "volume_type": ["unit"], "other_volume_type": ["unit"], "orientation": ["vertical"], "adjacency": ["shared"] }, "then": { "element": "party_wall" }, "why": "A wall between two dwelling units is a party wall." },
+    { "id": "adj.shared.vertical", "when": { "adjacency": ["shared"], "orientation": ["vertical"] }, "then": { "element": "interior_wall", "side": "interior" }, "why": "A vertical face shared by two volumes is an interior wall." },
+    { "id": "adj.shared.horizontal", "when": { "adjacency": ["shared"], "orientation": ["top", "bottom"] }, "then": { "element": "floor", "side": "interior" }, "why": "Stacked volumes share a floor." },
+    { "id": "adj.ground", "when": { "adjacency": ["ground"] }, "then": { "element": "slab_on_grade" }, "why": "A bottom face at grade is a slab on grade." },
+    { "id": "orient.vertical", "when": { "orientation": ["vertical"] }, "then": { "element": "wall", "side": "exterior" }, "why": "An exposed vertical face is an exterior wall." },
+    { "id": "orient.top", "when": { "orientation": ["top", "sloped_up"] }, "then": { "element": "roof", "side": "exterior", "params": { "overhang": 450 } }, "why": "An exposed top or upward slope is a roof. Overhang is an office default; set per project." },
+    { "id": "orient.underside", "when": { "orientation": ["bottom", "sloped_down"] }, "then": { "element": "soffit", "side": "exterior" }, "why": "An exposed underside above grade (an overhang of the volume above) is a soffit." }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "rules": [
+    { "id": "open.curtain_wall", "when": { "width_ratio_min": 0.6, "height_ratio_min": 0.6 }, "then": { "element": "curtain_wall" }, "why": "An opening covering most of its face reads as curtain wall." },
+    { "id": "open.storefront", "when": { "host": ["wall"], "sill_max": 50, "width_min": 2400 }, "then": { "element": "storefront" }, "why": "A wide exterior opening at the floor is storefront." },
+    { "id": "open.door", "when": { "sill_max": 50, "height_min": 1900 }, "then": { "element": "door" }, "why": "An opening at the floor tall enough to walk through is a door." },
+    { "id": "open.window", "when": {}, "then": { "element": "window" }, "why": "Anything else is a window." }
+  ]
+}

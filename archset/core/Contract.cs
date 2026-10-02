@@ -29,6 +29,19 @@ public sealed class Contract
 
     public IReadOnlyList<string> ValidateInput(string op, JsonNode input) => _schemas.Validate(_inputs[op], input);
 
+    readonly Dictionary<string, JsonSchema> _rules = new();
+
+    /// <summary>Validate one face or opening rule against its definition in face-rules / opening-rules.schema.json.</summary>
+    public IReadOnlyList<string> ValidateRule(string set, JsonNode rule)
+    {
+        if (!_rules.TryGetValue(set, out var schema))
+        {
+            var file = set == "faces" ? "face-rules.schema.json" : "opening-rules.schema.json";
+            schema = _rules[set] = _schemas.Compile("rule." + set, new JsonObject { ["$ref"] = file + "#/$defs/rule" });
+        }
+        return _schemas.Validate(schema, rule);
+    }
+
     /// <summary>The MCP tools/list payload: one tool per operation, input schema inlined as written.</summary>
     public JsonArray McpTools() => new(Operations.Values.Select(o => (JsonNode)new JsonObject
     {
